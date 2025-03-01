@@ -16,7 +16,7 @@ git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
 ```
 cd dsci-310-group-14
 ```
-2. Set up the environment using Docker:
+2. Set up the environment using Docker image (based on R version 4.4.2):
 
 (Please first make sure the `Docker` application is opened and running in the background)
 
