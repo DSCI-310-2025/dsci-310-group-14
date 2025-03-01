@@ -5,7 +5,7 @@
     - Alan Lee
     - Charlotte Ren
 - A short summary of the project:
-## This project investigates whether an increase in newly hospitalized COVID-19 patients and a lower vaccination count lead to higher anxiety search trends. The analysis uses publicly available data and applies regression to explore potential correlations.
+    **This project investigates whether an increase in newly hospitalized COVID-19 patients and a lower vaccination count lead to higher anxiety search trends. The analysis uses publicly available data and applies regression to explore potential correlations.**
 
 - How to run your data analysis
 To reproduce the analysis in a containerized environment:
