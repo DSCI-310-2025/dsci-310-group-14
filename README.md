@@ -22,7 +22,10 @@ docker build -t covid_analysis .
 docker run -p 8888:8888 covid_analysis
 ```
 3. Access Jupyter Notebook:
-Open a browser and go to http://localhost:8888
+Open a browser and go to http://localhost:8888.
+
+Enter 'rstudio` as the username and the password from the output of previous `docker run`.
+
 Open notebooks/analysis.ipynb and execute the analysis.
 
 - A list of the dependencies needed to run your analysis
