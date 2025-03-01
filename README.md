@@ -16,7 +16,7 @@ git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
 ```
 cd dsci-310-group-14
 ```
-2. Set up the environment using Docker image (based on R version 4.4.2):
+2. Set up the environment using Docker image (based on Docker image `tidyverse` 4.4.3):
 
 (Please first make sure the `Docker` application is opened and running in the background)
 
@@ -33,14 +33,11 @@ docker run --rm -it -p 8888:8787 -v /$(pwd):/home/rstudio covid_analysis
 
     From the `Files` panel of the Rstudio, open `covid_analysis.qmd` from the root folder. You can run our analysis by running `covid_analysis.qmd`.
 
-- A list of the dependencies needed to run your analysis
-  - R (4.2.2)
-  - tidyverse
-  - tidymodels
-  - ggplot2
-  - GGally
-  - rmarkdown
-  - docker
+- A list of the dependencies needed to run the analysis, given the `rocker/tidyverse:4.4.3 image`:
+  - remotes
+  - tidymodels (version 1.3.0)
+  - GGally (version 2.2.1)
+  - tidyverse (pre-installed in rocker/tidyverse image)
 
 - The names of the licenses contained in `LICENSE.md`
 
