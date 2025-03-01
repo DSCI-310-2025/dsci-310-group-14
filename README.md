@@ -24,14 +24,14 @@ cd dsci-310-group-14
 docker build -t covid_analysis .
 ```
 ```
-docker run -p 8888:8888 covid_analysis
+docker run --rm -it -p 8888:8787 -v /$(pwd):/home/rstudio covid_analysis
 ```
-3. Access Jupyter Notebook:
+3. Access analysis:
     Open a browser and go to http://localhost:8888.
 
-    Enter 'rstudio' as the username and the password from the output of previous `docker run` command.
+    Enter 'rstudio' as the username and the password from the output of previous `docker run` command to open our Rstudio container.
 
-    Open notebooks/analysis.ipynb and execute the analysis.
+    From the `Files` panel of the Rstudio, open `covid_analysis.qmd` from the root folder. You can run our analysis by running `covid_analysis.qmd`.
 
 - A list of the dependencies needed to run your analysis
   - R (4.2.2)
