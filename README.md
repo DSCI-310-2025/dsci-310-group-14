@@ -13,8 +13,12 @@ To reproduce the analysis in a containerized environment:
 git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
 cd dsci-310-group-14
 2. Set up the environment using Docker:
+```
 docker build -t covid_analysis .
+```
+```
 docker run -p 8888:8888 covid_analysis
+```
 3. Access Jupyter Notebook:
 Open a browser and go to http://localhost:8888
 Open notebooks/analysis.ipynb and execute the analysis.
