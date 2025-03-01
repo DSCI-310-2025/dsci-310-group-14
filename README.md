@@ -1,11 +1,11 @@
-- The project title: COVID-19 Anxiety Trend Analysis
+# Project: COVID-19 Anxiety Trend Analysis
 - The list of contributors/authors: 
     - Alina Hameed
     - Vincy Huang
     - Alan Lee
     - Charlotte Ren
-- A short summary of the project (view from 10,000 feet)
-This project investigates whether an increase in newly hospitalized COVID-19 patients and a lower vaccination count lead to higher anxiety search trends. The analysis uses publicly available data and applies regression to explore potential correlations.
+- A short summary of the project:
+## This project investigates whether an increase in newly hospitalized COVID-19 patients and a lower vaccination count lead to higher anxiety search trends. The analysis uses publicly available data and applies regression to explore potential correlations.
 
 - How to run your data analysis
 To reproduce the analysis in a containerized environment:
