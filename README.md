@@ -9,7 +9,7 @@
 
 ### How to run our data analysis?
 To reproduce the analysis in a containerized environment, please follow the following steps:
-1. Clone the repository with the following commands in bash:
+1. Clone and move into the current Github repository with the following commands in bash into your local working directory:
 ```
 git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
 ```
