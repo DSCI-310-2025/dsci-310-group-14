@@ -1,0 +1,4 @@
+1740858443137:library(tidyverse)
+1740861558252:package_dependencies()
+1740861581221:tools::package.dependencies()
+1740861594784:tools::package_dependencies()
