@@ -1,4 +1,0 @@
-library(tidyverse)
-package_dependencies()
-tools::package.dependencies()
-tools::package_dependencies()
