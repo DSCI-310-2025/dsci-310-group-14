@@ -13,8 +13,13 @@ To reproduce the analysis in a containerized environment:
 ```
 git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
 ```
+```
 cd dsci-310-group-14
+```
 2. Set up the environment using Docker:
+
+(Please first make sure the `Docker` application is opened and running in the background)
+
 ```
 docker build -t covid_analysis .
 ```
