@@ -9,8 +9,10 @@ This project investigates whether an increase in newly hospitalized COVID-19 pat
 
 - How to run your data analysis
 To reproduce the analysis in a containerized environment:
-1. Clone the repository:
+1. Clone the repository with the following commands in bash:
+```
 git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
+```
 cd dsci-310-group-14
 2. Set up the environment using Docker:
 ```
