@@ -14,14 +14,14 @@ The data used herein is from publicly available repositories, including COVID-19
 
 ### How to run our data analysis?
 To reproduce the analysis in a containerized environment, please follow the following steps:
-1. Clone and move into the current Github repository with the following commands in bash into your local working directory:
+1. Clone and move into the current Github repository with the **following commands** in bash into your local working directory:
 ```
 git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
 ```
 ```
 cd dsci-310-group-14
 ```
-2. Set up the environment using Docker image (based on Docker image `tidyverse` 4.4.3):
+2. Set up the environment using Docker image (based on Docker image `tidyverse` 4.4.3) by running the **following commands** in bash on your local computer:
 
 (Please first make sure the `Docker` application is opened and running in the background)
 
