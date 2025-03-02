@@ -47,7 +47,8 @@ docker run --rm -it -p 8888:8787 -v /$(pwd):/home/rstudio covid_analysis
     From the `Files` panel of the Rstudio, open `covid_analysis.qmd` from the root folder. You can run our analysis by running `covid_analysis.qmd`.
 
 ## Dependencies
-- A list of the dependencies needed to run the analysis, given the `rocker/tidyverse:4.4.3 image`:
+- A list of the dependency packages needed to be **installed** to run the analysis:
+- (If run in Docker image, note that the analysis runs on `rocker/tidyverse:4.4.3 image`)
     - `tidyverse`: Installed from the latest version available at the time of container build.
     - `GGally`: Version 2.2.1
     - `purrr`: Installed from the latest version available at the time of container build.
