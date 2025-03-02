@@ -40,10 +40,16 @@ docker run --rm -it -p 8888:8787 -v /$(pwd):/home/rstudio covid_analysis
 
 ## Dependencies
 - A list of the dependencies needed to run the analysis, given the `rocker/tidyverse:4.4.3 image`:
-  - remotes
-  - tidymodels (version 1.3.0)
-  - GGally (version 2.2.1)
-  - tidyverse (pre-installed in rocker/tidyverse image)
+    - `tidyverse`: Installed from the latest version available at the time of container build.
+    - `GGally`: Version 2.2.1
+    - `purrr`: Installed from the latest version available at the time of container build.
+    - `knitr`: Installed from the latest version available at the time of container build.
+    - `tidymodels`: Version 1.3.0
+    - `leaps`: Version 3.1
+    - `mltools`: Version 0.1.0
+
+
+
 
 ## Licenses
 
