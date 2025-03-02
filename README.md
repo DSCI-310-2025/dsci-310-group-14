@@ -5,7 +5,7 @@
     - Alan Lee
     - Charlotte Ren
 
-# Project Summary 
+## Project Summary 
 The confluence of COVID-19 hospitalization rates, vaccine numbers, and public worry is a relevant area of study because it sheds light on the influence that public health metrics have on the overall mental health of populations. This project seeks to determine whether increasing numbers of newly hospitalized COVID-19 patients and falling vaccination rates align with rising search volumes related to anxiety. Using publicly available data from google open data,by utilizing regression analysis to investigate for potential correlations between these variables. 
 
 Our workflow includes data preprocessing, exploratory data analysis, and regression modeling, all accomplished using R. Preliminary results in our exploratory data anaylsis shows a moderate strength correlation between rising hospitalization, falling vaccination rates, and increased anxiety search volume trends, the connectivity of which shows the interconnectedness of physical and mental wellness throughout the pandemic. The analysis aims to provide actionable insights for policymakers and healthcare practitioners to effectively combat both the physical and psychological impacts of the pandemic.
