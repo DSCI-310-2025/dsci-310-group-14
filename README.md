@@ -21,7 +21,15 @@ git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
 ```
 cd dsci-310-group-14
 ```
-2. Set up the environment using Docker image (based on Docker image `tidyverse` 4.4.3) by running the **following commands** in bash on your local computer:
+
+To run our analysis file `covid_analysis.ipynb`, please make sure you have Jupyter lab set up on your device to run the analysis:
+- Run the following bash command to open Jupyterlab within the current `dsci-310-group-14` location:
+```
+jupyter lab
+```
+- Then, within Jupyter lab, open `covid_analysis.ipynb` and run the analysis.
+  
+2. You can also set up the environment we have using Docker image (based on Docker image `tidyverse` 4.4.3) by running the **following commands** in bash on your local computer:
 
 (Please first make sure the `Docker` application is opened and running in the background)
 
