@@ -39,12 +39,10 @@ docker build -t covid_analysis .
 ```
 docker run --rm -it -p 8888:8787 -v /$(pwd):/home/rstudio covid_analysis
 ```
-3. Access analysis:
+3. Access analysis environment:
     Open a browser and go to http://localhost:8888.
 
     Enter 'rstudio' as the username and the password from the output of previous `docker run` command to open our Rstudio container.
-
-    From the `Files` panel of the Rstudio, open `covid_analysis.qmd` from the root folder. You can run our analysis by running `covid_analysis.qmd`.
 
 ## Dependencies
 - A list of the dependency packages needed to be **installed** to run the analysis:
