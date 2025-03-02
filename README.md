@@ -1,4 +1,4 @@
-# Project: COVID-19 Anxiety Trend Analysis
+# Project: COVID-19 Anxiety Search Trend Analysis
 - The list of contributors/authors: 
     - Alina Hameed
     - Vincy Huang
