@@ -12,7 +12,7 @@ Our workflow includes data preprocessing, exploratory data analysis, and regress
     
 The data used herein is from publicly available repositories, including COVID-19 hospitalization statistics, vaccination records, and Google Trends as collect by Google Open Data which can be found [here!](https://github.com/GoogleCloudPlatform/covid-19-open-data#aggregated-table)
 
-### How to run our data analysis?
+## How to run our data analysis?
 To reproduce the analysis in a containerized environment, please follow the following steps:
 1. Clone and move into the current Github repository with the **following commands** in bash into your local working directory:
 ```
@@ -38,11 +38,14 @@ docker run --rm -it -p 8888:8787 -v /$(pwd):/home/rstudio covid_analysis
 
     From the `Files` panel of the Rstudio, open `covid_analysis.qmd` from the root folder. You can run our analysis by running `covid_analysis.qmd`.
 
+## Dependencies
 - A list of the dependencies needed to run the analysis, given the `rocker/tidyverse:4.4.3 image`:
   - remotes
   - tidymodels (version 1.3.0)
   - GGally (version 2.2.1)
   - tidyverse (pre-installed in rocker/tidyverse image)
+
+## Licenses
 
 - The names of the licenses contained in `LICENSE.md`
 
