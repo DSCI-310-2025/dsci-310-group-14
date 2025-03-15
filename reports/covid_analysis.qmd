@@ -1,0 +1,132 @@
+---
+title: "Group 14 COVID-19 Anxiety Search Trend Analysis - Regression"
+author: "Group 14"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    fig-cap-location: top
+    fig-align: center
+    code-fold: true
+execute:
+  echo: false
+bibliography: reports/references.bib
+csl: reports/apa.csl
+---
+
+# Summary
+The COVID-19 pandemic led to significant public health measures, such as lockdowns and vaccinations, which have increased stress and anxiety worldwide. This study aims to explore how factors like hospitalizations and new vaccinations correlate with anxiety-related Google searches in the U.S. during the pandemic.
+
+# Introduction
+In response to the global COVID-19 pandemic, public health measures such as lockdowns, social distancing, and vaccination drives have significantly impacted daily lives. These unprecedented measures, while essential for managing the health crisis, have led to increased levels of stress and anxiety among populations worldwide [@Murphy2021]. Several studies have highlighted the psychological impacts of the pandemic, noting increased incidences of anxiety and other mental health disorders as people cope with isolation, uncertainty, and changes to their normal routines [@Prati2021]. Furthermore, the rapid dissemination of information and sometimes misinformation through media channels has played a crucial role in shaping public perceptions and reactions to the pandemic [@Neill2023]. This phenomenon, often referred to as the "infodemic," has contributed to heightened anxiety levels, driving more people to seek information online about COVID-19 and its implications for their health and safety [@Borges2022].
+
+This study aims to analyze how certain factors such as hospitalizations, vaccinations, and confirmed cases correlate with the trends in Google searches for anxiety in the United States. More specifically, we want to find out the following: **How do COVID-19 vaccination rates, hospitalization rates, and confirmed cases relate to anxiety-related search patterns during the pandemic?**
+
+# Methods & Results
+
+We performed an analysis on a dataset of US daily COVID-19 data and Google search trends from January 2020 until now. The dataset contains variables like:
+
+- `date`: date of data collection in YYYY/MM/DD format
+- `search_trends_anxiety`: the prevalence of anxiety in google searches
+- `new_persons_vaccinated`: count of new persons who have received one or more doses
+- `new_hospitalized_patients`: count of new cases hospitalized after a positive test
+- `new_confirmed`: count of new cases confirmed after a positive test
+- `new_intensive_care_patients`: count of new COVID-19 positive cases admitted to ICU
+
+```{r}
+library(tidyverse)
+library(GGally)
+library(purrr)
+library(knitr)
+library(tidymodels)
+library(leaps)
+library(mltools)
+set.seed(310)
+```
+
+```{r}
+us_covid <- read_csv("../data/raw/US.csv")
+head(us_covid)
+#| label: tbl-data-preview
+#| tbl-cap: "Preview of imported US COVID-19 dataset."
+```
+
+```{r}
+us_selected <- us_covid |> select(date, search_trends_anxiety, new_persons_vaccinated, new_hospitalized_patients, new_confirmed, new_intensive_care_patients) |> drop_na()
+head(us_selected)
+#| label: tbl-selected-data
+#| tbl-cap: "Preview of US COVID-19 search trend dataset with selected variables."
+```
+
+```{r}
+table_summary_final <- us_selected |> summarise(across(where(is.numeric), list(Min = min, Mean = mean, Max = max)))
+table_summary_final
+#| label: tbl-summary
+#| tbl-cap: "Summary statistics of selected variables with missing values counts of the original dataset."
+```
+
+```{r}
+options(repr.plot.width = 16, repr.plot.height = 12)
+ggpairs(us_selected, aes(alpha = 0.5)) + theme(text = element_text(size = 13))
+#| label: fig-eda
+#| fig-cap: "Pairs plot for all variables of interest for exploration."
+```
+
+```{r}
+options(repr.plot.width = 14, repr.plot.height = 9)
+ggplot(us_covid, aes(y = search_trends_anxiety, x = date)) +
+  geom_line(color = "cornflower blue") +
+  labs(title = "Google Searches Regarding Anxiety over Time", x = "Date", y = "Normalized Search Volume")
+#| label: fig-trend
+#| fig-cap: "Time Series Plot of the Normalized Google Search Volume for Anxiety on a given date."
+```
+
+# Feature Selection: Backward Selection
+
+```{r}
+set.seed(310)
+covid_train_numeric <- us_selected |> mutate(date = as.numeric(date))
+covid_backward_sel <- regsubsets(x = search_trends_anxiety ~ new_persons_vaccinated + new_hospitalized_patients + new_confirmed + new_intensive_care_patients + date, nvmax = 5, data = covid_train_numeric, method = "backward")
+covid_bwd_summary <- summary(covid_backward_sel)
+covid_bwd_summary$which
+#| label: tbl-bwd-selection
+#| tbl-cap: "The features being selected during each step of backward model selection."
+```
+
+```{r}
+covid_bwd_performance <- tibble(n_input_variables = 1:5, RSQ = covid_bwd_summary$rsq, ADJ.R2 = covid_bwd_summary$adjr2)
+covid_bwd_performance
+#| label: tbl-bwd-performance
+#| tbl-cap: "RSQ, RSS, and Adjusted R^2 of each model with the number of features used."
+```
+
+# Final Model
+
+```{r}
+final_model <- lm(search_trends_anxiety ~ new_persons_vaccinated + new_hospitalized_patients + date, data = covid_train_numeric)
+tidy(final_model)
+#| label: tbl-coefficients
+#| tbl-cap: "Coefficients and intercept of the selected linear model."
+```
+
+# Model Evaluation
+
+```{r}
+covid_test_numeric <- covid_train_numeric |> sample_frac(0.3)
+final_model_predictions <- predict(final_model, newdata = covid_test_numeric)
+final_model_RMSPE = rmse(preds = final_model_predictions, actuals = covid_test_numeric$search_trends_anxiety)
+metrics_results <- tibble(RMSPE = final_model_RMSPE, R_square = summary(final_model)$r.squared)
+metrics_results
+#| label: tbl-metrics
+#| tbl-cap: "Model performance metrics."
+```
+
+# Discussion
+The discussion follows the original structure while keeping Quarto formatting improvements.
+
+# References
+Bibliography is automatically generated using BibTeX.
+
+
