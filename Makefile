@@ -74,4 +74,3 @@ clean:
 	rm -f index.html
 	rm -f reports/*.pdf
 	rm -f reports/*.html
-	
