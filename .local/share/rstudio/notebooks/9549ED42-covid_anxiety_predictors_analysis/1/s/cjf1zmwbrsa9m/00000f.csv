@@ -1,0 +1,6 @@
+"0","#| label: tbl-bwd-performance"
+"0","#| tbl-cap: ""RSQ, RSS, and Adjusted R^2 of each model with the number of features used."""
+"0","covid_bwd_performance <- tibble(n_input_variables = 1:5, "
+"0","                                RSQ = covid_bwd_summary$rsq, "
+"0","                                ADJ.R2 = covid_bwd_summary$adjr2)"
+"0","knitr::kable(covid_bwd_performance)"
