@@ -35,10 +35,10 @@ data/processed/train.csv data/processed/test.csv\
 	--coefficients="results/models/lm_coef.csv" --metrics_results="results/models/lm_metrics_results.csv"	
 	
 # render quarto report in HTML and PDF
-reports/covid_analysis.html: results reports/qmd_example.qmd
+reports/covid_analysis.html: results reports/covid_analysis.qmd
 	quarto render reports/covid_analysis.qmd --to html
 
-reports/covid_analysis.pdf: results reports/qmd_example.qmd
+reports/covid_analysis.pdf: results reports/covid_analysis.qmd
 	quarto render reports/covid_analysis.qmd --to pdf
 
 # clean
