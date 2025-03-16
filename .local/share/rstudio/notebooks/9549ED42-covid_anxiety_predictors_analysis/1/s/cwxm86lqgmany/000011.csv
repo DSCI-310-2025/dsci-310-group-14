@@ -1,0 +1,6 @@
+"0","new_vax_coef <- signif(final_model_df$estimate[2], digit = 3)"
+"0","new_hos_coef <- signif(final_model_df$estimate[3], digit = 3)"
+"0","date_coef    <- signif(final_model_df$estimate[4], digit = 3)"
+"0","intercept_coef <- round(final_model_df$estimate[1], 3)"
+"0",""
+"0",""

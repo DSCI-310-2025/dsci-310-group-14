@@ -1,0 +1,5 @@
+"0",""
+"0","highest_ADJ.R2 <- round(pull(slice_max(covid_bwd_performance, ADJ.R2), ADJ.R2), 3)"
+"0","chosen_n_input <- covid_bwd_performance |>"
+"0","                  slice_max(ADJ.R2) |>"
+"0","                  pull(n_input_variables)"

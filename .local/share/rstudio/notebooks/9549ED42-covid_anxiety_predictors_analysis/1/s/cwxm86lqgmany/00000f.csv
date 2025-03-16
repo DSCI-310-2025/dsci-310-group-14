@@ -1,0 +1,5 @@
+"0","#| label: tbl-coefficients"
+"0","#| tbl-cap: ""Coefficients and intercept of the selected linear model."""
+"0","final_model <- lm(search_trends_anxiety ~ new_persons_vaccinated + new_hospitalized_patients + date, data = covid_train_numeric)"
+"0","final_model_df <- tidy(final_model)"
+"0","knitr::kable(final_model_df)"

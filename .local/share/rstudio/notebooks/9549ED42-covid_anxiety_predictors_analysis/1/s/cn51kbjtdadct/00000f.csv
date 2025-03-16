@@ -1,0 +1,16 @@
+"0","#| label: tbl-selected-data"
+"0","#| tbl-cap: ""Preview of US COVID-19 search trend dataset with selected variables of interest."""
+"0","us_selected <- us_covid |> "
+"0","              select(date, search_trends_anxiety, new_persons_vaccinated, new_hospitalized_patients, new_confirmed, new_intensive_care_patients) |> "
+"0","              drop_na()"
+"0","knitr::kable(head(us_selected))"
+"2","Registered S3 methods overwritten by 'htmltools':
+  method               from         
+  print.html           tools:rstudio
+  print.shiny.tag      tools:rstudio
+  print.shiny.tag.list tools:rstudio
+"
+"2","Registered S3 method overwritten by 'rmarkdown':
+  method         from
+  print.paged_df     
+"
