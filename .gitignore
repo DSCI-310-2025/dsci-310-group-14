@@ -7,6 +7,8 @@ Rplots.pdf
 # Session Data files
 .RData
 .RDataTmp
+.config/
+.local/
 
 
 # User-specific files

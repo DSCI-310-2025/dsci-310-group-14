@@ -1,6 +1,6 @@
 .PHONY: all reports all_tables_figures clean
 
-# render entire analysis
+# render analysis report
 all:
 	make index.html
 	make reports/covid_anxiety_predictors_analysis.html
