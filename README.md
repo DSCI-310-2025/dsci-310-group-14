@@ -20,24 +20,25 @@ To reproduce our analysis in a containerized environment, please follow the foll
 1. **Install and launch** [Docker](https://www.docker.com/get-started/) on your computer according to your device system.
    > Why Docker?
    > 
-   > Docker packs a specific R language version and package dependencies into a "container" that works the same on any computer operating systems, allowing our analysis and results to be rendered using the environement it was initially built in. This ensures that you as a reader can reproduce and audit our coding analysis results in a reliable and transparent way. 
+   > Docker packs a specific R language version and package dependencies into a "container" that works the same on any computer operating systems, allowing our analysis and results to be rendered using the environement it was initially built in. This ensures that you as a reader can reproduce and audit our coding analysis results in a reliable and transparent way.
+   
+   Now you should have Docker launched and ready for the next steps: Pulling and running the container!
 
-1. On your computer, open the **Terminal** application. Use the following command to lone our Github repository with into your local working directory:
+1. **Pull the Container**: On your computer, open the **Terminal** application. Use the following command to pull our analysis' Dockerhub image to your local device:
     ```
-    git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
+    docker pull yvinc/dsci-310-group-14
     ```
-1. Move into the cloned directory on your local computer by using the following command:
-    ```
-    cd dsci-310-group-14
-    ```
-### Running the analysis while Docker is opened:
-1. On Apple Mac (ARM-based/Intel-based) and on Windows operating systems:
-    ```
-    docker build -t covid_anxiety_search_analysis .
-    ```
-    ```
-    docker run --rm -it -p 8888:8787 -e PASSWORD="covid" -v /$(pwd):/home/rstudio covid_anxiety_search_analysis
-    ```
+1. **Run the Container**: Type the following command, then press 'enter' to run the container:
+   On Apple Mac (ARM-based/Intel-based) :
+   ```
+   docker run --rm -it -p 8888:8787 -e PASSWORD="covid" -v "$(pwd)":/home/rstudio yvinc/dsci-310-group-14
+   ```
+   
+   On Windows:
+   ```
+   docker run --rm -it -p 8888:8787 -e PASSWORD="covid" -v "%CD%":/home/rstudio yvinc/dsci-310-group-14
+   ```
+### Running the analysis:
 
 1. To access the analysis Docker environment, open the browser (e.g., Google Chrome) and go onto [http://localhost:8888](http://localhost:8888) in the browser search bar and hit enter.
 
