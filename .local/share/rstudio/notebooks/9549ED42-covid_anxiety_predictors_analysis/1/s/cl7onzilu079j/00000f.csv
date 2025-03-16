@@ -1,7 +1,0 @@
-"0","#| label: fig-trend"
-"0","#| fig-cap: ""Time Series Plot of the Normalized Google Search Volume for Anxiety on a given date."""
-"0","options(repr.plot.width = 14, repr.plot.height = 9)"
-"0","ggplot(us_covid, aes(y = search_trends_anxiety, x = date)) +"
-"0","  geom_line(color = ""cornflower blue"") +"
-"0","  labs(title = ""Google Searches Regarding Anxiety over Time"", x = ""Date"", y = ""Normalized Search Volume"")"
-"0",""

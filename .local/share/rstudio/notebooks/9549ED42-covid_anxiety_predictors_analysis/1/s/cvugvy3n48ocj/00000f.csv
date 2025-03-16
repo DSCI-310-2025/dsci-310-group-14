@@ -1,8 +1,0 @@
-"0","#| label: fig-pairplot"
-"0","#| fig-cap: ""Pairs plot for all variables of interest for exploration. """
-"0","options(repr.plot.width = 16, repr.plot.height = 12) # change plot sizes to an appropiate size"
-"0",""
-"0","ggpairs(us_selected, aes(alpha = 0.5)) +"
-"0","    theme(text = element_text(size = 13)) +"
-"0","    ggtitle(""Pairs plot for all variables of interest for exploration"") +"
-"0","    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))"
