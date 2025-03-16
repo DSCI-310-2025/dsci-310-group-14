@@ -38,9 +38,9 @@ To reproduce our analysis in a containerized environment, please follow the foll
    ```
    docker run --rm -it -p 8888:8787 -e PASSWORD="covid" -v "%CD%":/home/rstudio yvinc/dsci-310-group-14
    ```
-### Running the analysis:
+### Then, we can run the analysis:
 
-1. To access the analysis Docker environment, open the browser (e.g., Google Chrome) and go onto [http://localhost:8888](http://localhost:8888) in the browser search bar and hit enter.
+1. **After running the above commands**, open the browser (e.g., Google Chrome) and go onto [http://localhost:8888](http://localhost:8888) in the browser search bar and press enter.
 
    On `http://localhost:8888`, enter the following information:
    - `Username`: rstudio
@@ -49,15 +49,15 @@ To reproduce our analysis in a containerized environment, please follow the foll
    Then left click `Sign in`.
 
 1. After you have signed in, you will see an empty Rstudio navigation page.
-2. You can now move your cursor to the right panel of the page near the bottom right. Click into the **`reports`** folder, then left-click the **`covid_anxiety_predictors_analysis.qmd`** Quarto report file to open the analysis.
-3. With `covid_anxiety_predictors_analysis.qmd` opened, navigate your cursor to the **blue `Render` arrow** above the file panel.
-4. Left click this `Render` blue arrow to run our analysis (wait time to produce the analysis is about 15 seconds).
+1. You can now move your cursor to the right panel of the page near the bottom right. Click into the **`reports`** folder, then left-click the **`covid_anxiety_predictors_analysis.qmd`** Quarto report file to open the analysis.
+1. With `covid_anxiety_predictors_analysis.qmd` opened, navigate your cursor to the **blue `Render` arrow** above the file panel.
+1. Left click this `Render` blue arrow to run our analysis (wait time to produce the analysis is about 15 seconds).
 
-   **Important note**: You can expect a `html` rendering of our report to be produced in the popup window. If the popup window is blocked by your browser and you see a `Popup blocked` message, please click `Try Again` to open the `html` rendering of our report.
+   > **Important note**: You can expect a `html` rendering of our report to be produced in the popup window. If the popup window is blocked by your browser and you see a `Popup blocked` message, please click `Try Again` to open the `html` rendering of our report.
 
-5. After the Quarto rendering, you should be able to see a new window popup with the name, "Group 14: Predict COVID-19 Anxiety Search Trend - Regression".
+1. After the Quarto rendering, you should be able to see a new window popup with the name, "Group 14: Predict COVID-19 Anxiety Search Trend - Regression".
 
-6. You are now able to reproduce and review our analysis report and results!
+1. You are now able to reproduce and review our analysis report and results!
 
 ## Dependencies
 - A list of the dependency packages needed to be **installed** to run the analysis:
