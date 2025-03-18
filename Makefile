@@ -56,11 +56,13 @@ all_tables_figures: \
 	results/models/lm_coef.csv results/models/lm_metrics_results.csv
 
 # write the report
+index.html: reports/covid_anxiety_predictors_analysis.qmd
+	quarto render reports/covid_anxiety_predictors_analysis.qmd
+	mv reports/covid_anxiety_predictors_analysis.html docs/index.html
+
 reports/covid_anxiety_predictors_analysis.html: reports/covid_anxiety_predictors_analysis.qmd
 	quarto render reports/covid_anxiety_predictors_analysis.qmd --to html
 	
-index.html: reports/covid_anxiety_predictors_analysis.qmd
-	quarto render reports/covid_anxiety_predictors_analysis.qmd
 
 reports:
 	make index.html
