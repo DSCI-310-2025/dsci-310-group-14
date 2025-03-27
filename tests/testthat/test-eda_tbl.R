@@ -1,6 +1,8 @@
 library(tibble)
-library(dplyr)    
+library(dplyr)
+library(tidyr)
 library(here)
+
 source(here::here("R", "eda_tbl.R"))
 
 
