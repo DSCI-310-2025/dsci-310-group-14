@@ -1,4 +1,8 @@
+library(tibble)
+library(dplyr)    
+library(here)
 source(here::here("R", "eda_tbl.R"))
+
 
 test_that("summarize_covid_data outputs a complete summary table", {
   raw <- tibble(
