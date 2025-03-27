@@ -1,4 +1,5 @@
-source("R/clean_covid_data.R")
+library(here)
+source(here("R", "clean_covid_data.R"))
 
 test_that("clean_covid_data selects correct columns and removes NAs", {
   sample_df <- data.frame(
