@@ -1,6 +1,7 @@
 library(tibble)
 library(dplyr)
 library(tidyr)
+library(lubridate)
 library(here)
 
 source(here::here("R", "eda_tbl.R"))
