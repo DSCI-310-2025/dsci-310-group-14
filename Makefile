@@ -2,6 +2,7 @@
 
 # render analysis report
 all:
+	make all_tables_figures
 	make index.html
 	make reports/covid_anxiety_predictors_analysis.html
 
@@ -63,7 +64,6 @@ index.html: reports/covid_anxiety_predictors_analysis.qmd
 reports/covid_anxiety_predictors_analysis.html: reports/covid_anxiety_predictors_analysis.qmd
 	quarto render reports/covid_anxiety_predictors_analysis.qmd --to html
 	
-
 reports:
 	make index.html
 	make reports/covid_anxiety_predictors_analysis.html
