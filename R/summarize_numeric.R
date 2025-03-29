@@ -28,3 +28,4 @@ summarize_numeric <- function(data) {
                             names_sep = "_(?=[^_]+$)") |>
         tidyr::pivot_wider(names_from = Statistic, values_from = value)
 }
+
