@@ -2,10 +2,13 @@
 .Rhistory
 .Rapp.history
 .DS_Store
+Rplots.pdf
 
 # Session Data files
 .RData
 .RDataTmp
+.local/share/rstudio/
+.config/rstudio
 
 
 # User-specific files
@@ -41,11 +44,10 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# pkgdown site
-docs/
-
 # translation temp files
 po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+/.quarto/

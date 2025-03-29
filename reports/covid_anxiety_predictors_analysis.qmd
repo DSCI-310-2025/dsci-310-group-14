@@ -15,8 +15,8 @@ format:
      code-tools: true
 execute:
      warning: false
-bibliography: references.bib
-csl: apa.csl
+bibliography: references/references.bib
+csl: references/apa.csl
 ---
 # Summary
 The COVID-19 pandemic led to significant public health measures, such as lockdowns and vaccinations, which have increased stress and anxiety worldwide. This study aims to explore how factors like hospitalizations and new vaccinations correlate with anxiety-related Google searches in the United States (US) during the pandemic.
@@ -28,7 +28,7 @@ This study aims to analyze how certain factors such as hospitalizations, vaccina
 
 # Methods:
 ## Data
-To find an answer to this question, we performed an analysis on a dataset of US daily COVID-19 data and Google search trends from January 2020 until now. The dataset contains 6 variables of relavant to our question as following:
+To find an answer to this question, we performed an analysis on a dataset of US daily COVID-19 data and Google search trends from January 2020 until now. The raw data set contains 991 rows × 564 columns, within which includs 6 variables relavant to our question. Our variables of interest are as following:
 
 - `date`: date of data collection in YYYY/MM/DD format
 - `search_trends_anxiety`: the prevalence of anxiety in google searches
@@ -53,10 +53,8 @@ set.seed(310)
 ```
 
 ```{r}
-#| label: tbl-data-preview
-#| tbl-cap: "Preview of imported raw US COVID-19 dataset."
+#| echo: false
 us_covid <- read_csv("../data/raw/US.csv")
-knitr::kable(head(us_covid))
 ```
 
 ## Exploratory Data Analysis (EDA)

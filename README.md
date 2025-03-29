@@ -13,36 +13,51 @@ Our workflow includes data preprocessing, exploratory data analysis, and regress
 The data used herein is from publicly available repositories, including COVID-19 hospitalization statistics, vaccination records, and Google Trends as collected by Google Open Data which can be found [here!](https://github.com/GoogleCloudPlatform/covid-19-open-data#aggregated-table)
 
 ## How to run our data analysis?
-To reproduce the analysis in a containerized environment, please follow the following steps:
-1. Clone and move into the current Github repository with the **following commands** in bash into your local working directory:
-```
-git clone https://github.com/UBC-DSCI/dsci-310-group-14.git
-```
-```
-cd dsci-310-group-14
-```
+To reproduce our analysis in a containerized environment, please follow the following steps:
+> Note: Our project environment presupposes the basic software setup and hardware requirements in [DSCI 310 Course Computer Setup](https://ubc-dsci.github.io/dsci-310-student/computer-setup.html). We strongly encourage readers to confirm their device setup through this guide.
 
-To run our analysis file `covid_analysis.ipynb`, please make sure you have Jupyter lab set up on your device to run the analysis:
-- Run the following bash command to open Jupyterlab within the current `dsci-310-group-14` location:
-```
-jupyter lab
-```
-- Then, within Jupyter lab, open `covid_analysis.ipynb` and run the analysis.
+### Basic setup:
+1. **Install and launch** [Docker](https://www.docker.com/get-started/) on your computer according to your device system.
+   > Why Docker?
+   > 
+   > Docker packs a specific R language version and package dependencies into a "container" that works the same on any computer operating systems, allowing our analysis and results to be rendered using the environement it was initially built in. This ensures that you as a reader can reproduce and audit our coding analysis results in a reliable and transparent way.
+   
+   Now you should have Docker launched and ready for the next steps: Pulling and running the container!
+
+1. **Pull the Container**: On your computer, open the **Terminal** application. Use the following command to pull our analysis' Dockerhub image to your local device:
+    ```
+    docker pull yvinc/dsci-310-group-14
+    ```
+1. **Run the Container**: Type the following command, then press 'enter' to run the container:
+   On Apple Mac (ARM-based/Intel-based) :
+   ```
+   docker run --rm -it -p 8888:8787 -e PASSWORD="covid" -v "$(pwd)":/home/rstudio yvinc/dsci-310-group-14
+   ```
+   
+   On Windows:
+   ```
+   docker run --rm -it -p 8888:8787 -e PASSWORD="covid" -v "%CD%":/home/rstudio yvinc/dsci-310-group-14
+   ```
+### Then, we can run the analysis:
+
+1. **After running the above commands**, open the browser (e.g., Google Chrome) and go onto [http://localhost:8888](http://localhost:8888) in the browser search bar and press enter.
+
+   On `http://localhost:8888`, enter the following information:
+   - `Username`: rstudio
+   - `Password`: covid
   
-2. You can also set up the environment we have using Docker image (based on Docker image `tidyverse` 4.4.3) by running the **following commands** in bash on your local computer:
+   Then left click `Sign in`.
 
-(Please first make sure the `Docker` application is opened and running in the background)
+1. After you have signed in, you will see an empty Rstudio navigation page.
+1. You can now move your cursor to the right panel of the page near the bottom right. Click into the **`reports`** folder, then left-click the **`covid_anxiety_predictors_analysis.qmd`** Quarto report file to open the analysis.
+1. With `covid_anxiety_predictors_analysis.qmd` opened, navigate your cursor to the **blue `Render` arrow** above the file panel.
+1. Left click this `Render` blue arrow to run our analysis (wait time to produce the analysis is about 15 seconds).
 
-```
-docker build -t covid_analysis .
-```
-```
-docker run --rm -it -p 8888:8787 -v /$(pwd):/home/rstudio covid_analysis
-```
-3. Access analysis environment:
-    Open a browser and go to http://localhost:8888.
+   > **Important note**: You can expect a `html` rendering of our report to be produced in the popup window. If the popup window is blocked by your browser and you see a `Popup blocked` message, please click `Try Again` to open the `html` rendering of our report.
 
-    Enter 'rstudio' as the username and the password from the output of previous `docker run` command to open our Rstudio container.
+1. After the Quarto rendering, you should be able to see a new window popup with the name, "Group 14: Predict COVID-19 Anxiety Search Trend - Regression".
+
+1. You are now able to reproduce and review our analysis report and results!
 
 ## Dependencies
 - A list of the dependency packages needed to be **installed** to run the analysis:
