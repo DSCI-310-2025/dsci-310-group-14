@@ -15,10 +15,10 @@ summarize_dates <- function(dates) {
   dates_day <- as.numeric(dates)
   tibble::tibble(Variable = "date",
                  Min = min(dates_day),
-                 Q25 = quantile(dates_day, 0.25),
+                 Q25 = unname(quantile(dates_day, 0.25)),
                  Mean = mean(dates_day),
                  Median = median(dates_day),
-                 Q75 = quantile(dates_day, 0.75),
+                 Q75 = unname(quantile(dates_day, 0.75)),
                  Max = max(dates_day)) %>%
     dplyr::mutate(dplyr::across(dplyr::where(is.numeric), as.Date))
 }
