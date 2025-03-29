@@ -16,12 +16,12 @@ summarize_numeric <- function(data) {
   
   data |>
     dplyr::summarize(dplyr::across(dplyr::where(is.numeric), list(
-         Min = min,
-         Q25 = ~quantile(.x, .25),
-        Mean = mean,
-      Median = median,
-         Q75 = ~quantile(.x, .75),
-         Max = max),
+      Min = ~min(.x, na.rm = TRUE),
+      Q25 = ~quantile(.x, 0.25, na.rm = TRUE),
+      Mean = ~mean(.x, na.rm = TRUE),
+      Median = ~median(.x, na.rm = TRUE),
+      Q75 = ~quantile(.x, 0.75, na.rm = TRUE),
+      Max = ~max(.x, na.rm = TRUE)),
       .names = "{.col}_{.fn}")) |>
         tidyr::pivot_longer(     cols = dplyr::everything(),
                              names_to = c("Variable", "Statistic"),
