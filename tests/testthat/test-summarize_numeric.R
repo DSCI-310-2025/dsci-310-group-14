@@ -39,3 +39,30 @@ test_that("summarize_numeric ignores non-numeric columns", {
   
   result <- summarize_numeric(test_data)
   expect_equal(result, expected, tolerance = 1e-6)})
+
+
+
+# Test 4: Edge case - all identical values
+test_that("summarize_numeric handles identical values", {
+  test_data <- data.frame(a = c(5, 5, 5, 5))
+  
+  expected <- tibble::tibble(Variable = "a", Min = 5, Q25 = 5, 
+                             Mean = 5, Median = 5, Q75 = 5, Max = 5)
+  
+  result <- summarize_numeric(test_data)
+  expect_equal(result, expected, tolerance = 1e-6)})
+
+
+# Test 5: Edge case - single value (one row, one column in the dataframe)
+test_that("summarize_numeric works with a single value", {
+  test_data <- data.frame(a = 42)
+  
+  expected <- tibble::tibble(Variable = "a", Min = 42, Q25 = 42, 
+                             Mean = 42, Median = 42, Q75 = 42, Max = 42)
+  
+  result <- summarize_numeric(test_data)
+  expect_equal(result, expected, tolerance = 1e-6)})
+
+
+
+
