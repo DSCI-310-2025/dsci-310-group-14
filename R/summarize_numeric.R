@@ -10,7 +10,7 @@
 #' # summarize_numeric(data)
 #' 
 
-summarize_numeric <- functioin(data) {
+summarize_numeric <- function(data) {
   requireNamespace("dplyr", quietly = TRUE) # requireNamespace allows for :: operator
   requireNamespace("tidyr", quietly = TRUE)
   
