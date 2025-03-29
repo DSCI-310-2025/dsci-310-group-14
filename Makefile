@@ -1,3 +1,4 @@
+
 .PHONY: all reports all_tables_figures clean
 
 # render analysis report
@@ -19,10 +20,10 @@ data/processed/US_partitioned.csv: scripts/02_cleaning.R data/raw/US_cleaned_nam
 
 # results: plots and tables
 results/tables/summary.csv results/tables/detailed_summary.csv: scripts/03_eda_tbl.R data/raw/US_cleaned_name.csv data/processed/US_partitioned.csv
-    Rscript scripts/03_eda_tbl.R \
-      --input_unprocessed=data/raw/US_cleaned_name.csv \
-      --input_processed=data/processed/US_partitioned.csv \
-      --tbl_summary=results/tables/summary.csv \
+		Rscript scripts/03_eda_tbl.R	\
+			--input_unprocessed=data/raw/US_cleaned_name.csv	\
+			--input_processed=data/processed/US_partitioned.csv	\
+			--tbl_summary=results/tables/summary.csv	\
 			--tbl_detailed_summary=results/tables/detailed_summary.csv
 
 results/figures/pairplot.png results/figures/anxiety_search_time_series.png: scripts/04_eda_viz.R data/raw/US_cleaned_name.csv data/processed/US_partitioned.csv
@@ -31,10 +32,11 @@ results/figures/pairplot.png results/figures/anxiety_search_time_series.png: scr
 			--input_processed=data/processed/US_partitioned.csv \
 			--output_fig1=results/figures/pairplot.png \
 			--output_fig2=results/figures/anxiety_search_time_series.png
+			
 data/processed/train.csv data/processed/test.csv results/models/bwd_sel_summary.csv results/models/bwd_performance.csv: data/processed/US_partitioned.csv
 		Rscript scripts/05_feature_selection.R \
 			--input_path=data/processed/US_partitioned.csv \
-			--outout_train=data/processed/train.csv \
+			--output_train=data/processed/train.csv \
 			--output_test=data/processed/test.csv \
 			--bwd_sel_summary=results/models/bwd_sel_summary.csv \
 			--bwd_performance=results/models/bwd_performance.csv

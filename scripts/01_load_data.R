@@ -6,7 +6,7 @@
 Usage: 01_load_data.R --file_path=<file_path> --output_path=<output_path>
 
 Options:
---file_path=<file_path>     Path to the input file (a URL).
+--file_path=<file_path>     Path to the input file (or a URL).
 --output_path=<output_path> Path and filename where to designate the file and what to call it.
 " -> doc
 
