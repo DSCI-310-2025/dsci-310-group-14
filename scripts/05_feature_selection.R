@@ -3,10 +3,10 @@
 "This script reads data from the second script, performs feature selection 
 for linear regression and summarizes the results as a figure(s) and a table(s).
 
-Usage: 05_feature_selection.R --input_path=<input_path> --outout_train=<outout_train> --output_test=<output_test> --bwd_sel_summary=<bwd_sel_summary> --bwd_performance=<bwd_performance>
+Usage: 05_feature_selection.R --input_path=<input_path> --output_train=<output_train> --output_test=<output_test> --bwd_sel_summary=<bwd_sel_summary> --bwd_performance=<bwd_performance>
 Options:
 --input_path=<input_path>           A path/filename pointing to the data
---outout_train=<outout_train>       A path/filename to save training data
+--output_train=<output_train>       A path/filename to save training data
 --output_test=<output_test>         A path/filename to save testing data
 --bwd_sel_summary=<bwd_sel_summary> A path/filename to save summary result table
 --bwd_performance=<bwd_performance> A path/filename to save performance result table
@@ -43,7 +43,7 @@ covid_test <- anti_join(model_data,
 # converts dates into number of days for feature selection:
 covid_train_numeric <- covid_train |> 
                        mutate(date = as.numeric(date))
-write_csv(covid_train_numeric, opt$outout_train)
+write_csv(covid_train_numeric, opt$output_train)
 
 covid_test_numeric <- covid_test|> 
                       mutate(date = as.numeric(date))
