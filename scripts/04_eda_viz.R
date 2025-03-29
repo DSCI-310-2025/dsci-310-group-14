@@ -10,6 +10,9 @@ library(tidyverse)
 library(docopt)
 library(GGally)
 
+# Source the create_pairs_plot function from root directory
+source("R/eda_viz_pairplot.R")
+
 opt <- docopt(doc)
 
 # read unprocessed and processed data
@@ -21,14 +24,7 @@ us_selected <- read_csv(processed_data_path)
 
 
 # Figure 1: Pair plot of all variables
-options(repr.plot.width = 16, repr.plot.height = 12) # change plot sizes to an appropiate size
-
-ggpairs(us_selected, aes(alpha = 0.5)) +
-    theme(text = element_text(size = 13)) +
-    ggtitle("Pairs plot for all variables of interest for exploration") +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-ggsave(opt$output_fig1)
+create_pairs_plot(us_selected, opt$output_fig1, width = 16, height = 12)
 
 # Figure 2: Time series plot on anxiety search trend across all COVID-19 dates
 
