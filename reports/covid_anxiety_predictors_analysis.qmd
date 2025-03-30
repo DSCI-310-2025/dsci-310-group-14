@@ -118,12 +118,11 @@ table_summary_final <- inner_join(table_summary, us_missing_counts, by = "Variab
 knitr::kable(table_summary_final)
 ```
 
-From the following pairplot visualization, we see that new vaccination status and time progression (`date`) has positive moderate association with anxiety search trend. Meanwhile, new hospitalization patient rate is negatively and moderately correlated with anxiety search trend. 
+From the following @fig-pairplot pairplot visualization, we see that new vaccination status and time progression (`date`) has positive moderate association with anxiety search trend. Meanwhile, new hospitalization patient rate is negatively and moderately correlated with anxiety search trend. 
 
 The remaining variables such as the number of newly confirmed COVID-19 cases (`new_confirmed`) and newly admitted intensive care patints (`new_intensive_care_patients`) either show weak negative correlation or no correlation with anxiety search trend.
 
-### Figure: Pair Plot
-![](../results/figures/pairplot.png)
+![Pairs plot for all variables of interest for exploration](../results/figures/pairplot.png){#fig-pairplot}
 
 > `new_persons_vaccinated` seems to have a moderate positive linear correlation with anxiety serach trend.
 > 
@@ -133,10 +132,10 @@ The remaining variables such as the number of newly confirmed COVID-19 cases (`n
 >
 > `date` seems to have a weak positive linear correlation with anxiety serach trend.
 
-In the graph below, we can observe that anxiety searches seem to be consistent across the COVID-19 pandemic except for 3 peaks around winter of 2020, spring of 2021, and spring of 2022.
+In @fig-trend, we can observe that anxiety searches seem to be consistent across the COVID-19 pandemic except for 3 peaks around winter of 2020, spring of 2021, and spring of 2022.
 
-### Figure: Anxiety Search Trends Over Time
-![](../results/figures/anxiety_search_time_series.png)
+![Anxiety Search Trends Over Time](../results/figures/anxiety_search_time_series.png){#fig-trend}
+
 
 ## Feature Selection: Backward Selection
 In this section, we perform feature selection using backward seleciton method. Using backward selection, we will be able to select the number of variables has optimal predictive ability using measures of adjusted $R^2$. Higher adjusted $R^2$ indicates better predictive performance of the features.
