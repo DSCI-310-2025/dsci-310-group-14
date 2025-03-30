@@ -21,6 +21,11 @@ library(purrr)
 library(leaps)
 library(mltools)
 
+# source R functions
+source("make_final_lm_model.R")
+source("results_lm_coef.R")
+source("model_predictions.R")
+
 opt <- docopt(doc)
 
 # read in train and test data
@@ -31,28 +36,12 @@ covid_test_numeric <- read_csv(test_path)
 
 
 # create a mulitple linear regression model with the selected features
-final_model <- lm(search_trends_anxiety ~ new_persons_vaccinated + new_hospitalized_patients + date,
-                  data = covid_train_numeric)
+final_model <- make_final_lm_model(covid_train_numeric)
 
 #create a table with the regression results
-lm_coef <- tidy(final_model)
-write_csv(lm_coef, opt$coefficients)
+results_lm_coef(final_model)
 
-
-# test model on testing set
 # apply the model to predict test data:
-final_model_predictions <- predict(final_model, newdata = covid_test_numeric)
-
 # find the RMSE between the model's prediction and the actual values
-final_model_RMSPE = rmse(preds = final_model_predictions,
-                        actuals = covid_test_numeric$search_trends_anxiety)
-
-# preview RMSPE error rate:
-final_model_RMSPE
-
-# preview R-squared:
-r_sqr <- summary(final_model)$r.squared
-
 # create dataframe with RMSPE and R-squared
-metrics_results <- tibble(RMSPE = final_model_RMSPE, R_square = r_sqr)
-write_csv(metrics_results, opt$metrics_results)
+model_predictions(final_model, covid_test_numeric)
