@@ -4,10 +4,7 @@
 "This script creates exploratory data table(s) to help readers understand the data set. 
 The visualizations and tables will be saved as files. 
 
-Usage: 03_eda_tbl.R --input_unprocessed=<input_unprocessed> 
-                    --input_processed=<input_processed> 
-                    --tbl_summary=<tbl_summary> 
-                    --tbl_detailed_summary=<tbl_detailed_summary> 
+Usage: 03_eda_tbl.R --input_unprocessed=<input_unprocessed> --input_processed=<input_processed> --tbl_summary=<tbl_summary> --tbl_detailed_summary=<tbl_detailed_summary>
 " -> doc
 
 library(tidyverse)
