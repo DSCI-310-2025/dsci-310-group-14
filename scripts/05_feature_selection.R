@@ -26,6 +26,8 @@ source("R/feature_selection.R")
 
 opt <- docopt(doc)
 
+us_selected <- read_csv(processed_data_path)
+
 result <- feature_selection(
   df = us_selected,
   initial_test_size = 0.3,
@@ -50,34 +52,39 @@ result <- feature_selection(
 #                         covid_train,
 #                         by = "date")
 
+write_csv(result$train_data, opt$output_train)
+write_csv(result$test_data, opt$output_test)
+write_csv(result$selection_summary, opt$bwd_sel_summary)
+write_csv(result$performance, opt$bwd_performance)
+
 
 # converts dates into number of days for feature selection:
-covid_train_numeric <- covid_train |> 
-                       mutate(date = as.numeric(date))
-write_csv(covid_train_numeric, opt$output_train)
+# covid_train_numeric <- covid_train |> 
+#                        mutate(date = as.numeric(date))
+# write_csv(covid_train_numeric, opt$output_train)
 
-covid_test_numeric <- covid_test|> 
-                      mutate(date = as.numeric(date))
-write_csv(covid_test_numeric, opt$output_test)
+# covid_test_numeric <- covid_test|> 
+#                       mutate(date = as.numeric(date))
+# write_csv(covid_test_numeric, opt$output_test)
 
-# backward selection:
-covid_backward_sel <- regsubsets(x = search_trends_anxiety ~ new_persons_vaccinated + 
-                                                             new_hospitalized_patients +
-                                                             new_confirmed +
-                                                             new_intensive_care_patients + date,
-                                  nvmax = 5,
-                                  data = covid_train_numeric,
-                                  method = "backward",)
-covid_bwd_summary <- summary(covid_backward_sel)
-covid_bwd_summary_df <- as.tibble((covid_bwd_summary[["which"]]))
+# # backward selection: implemeted in the feature_selection
+# covid_backward_sel <- regsubsets(x = search_trends_anxiety ~ new_persons_vaccinated + 
+#                                                              new_hospitalized_patients +
+#                                                              new_confirmed +
+#                                                              new_intensive_care_patients + date,
+#                                   nvmax = 5,
+#                                   data = covid_train_numeric,
+#                                   method = "backward",)
+# covid_bwd_summary <- summary(covid_backward_sel)
+# covid_bwd_summary_df <- as.tibble((covid_bwd_summary[["which"]]))
 
-write_csv(covid_bwd_summary_df, opt$bwd_sel_summary)
+# write_csv(covid_bwd_summary_df, opt$bwd_sel_summary)
 
-# summary of each model' performance
-covid_bwd_performance <- tibble(n_input_variables = 1:5,
-                          RSQ = covid_bwd_summary$rsq,
-                          RSS = covid_bwd_summary$rss,
-                          ADJ.R2 = covid_bwd_summary$adjr2)
+# # summary of each model' performance
+# covid_bwd_performance <- tibble(n_input_variables = 1:5,
+#                           RSQ = covid_bwd_summary$rsq,
+#                           RSS = covid_bwd_summary$rss,
+#                           ADJ.R2 = covid_bwd_summary$adjr2)
 
-covid_bwd_performance
-write_csv(covid_bwd_performance, opt$bwd_performance)
+# covid_bwd_performance
+# write_csv(covid_bwd_performance, opt$bwd_performance)
