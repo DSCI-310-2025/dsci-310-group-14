@@ -1,7 +1,8 @@
 library(testthat)
 library(here)
-source(here("R", "make_final_lm_model.R"))
-source(here("R", "results_lm_coef.R"))
+source(here::here("R", "make_final_lm_model.R"))
+source(here::here("R", "results_lm_coef.R"))
+
 
 # create non lm object to give as argument
 missing_col_df <- tibble(class_labels = rep(c("date",
