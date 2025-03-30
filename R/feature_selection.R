@@ -9,6 +9,7 @@
 #'   - selected_features: character vector of selected features
 #'   - performance: data frame with model metrics
 #' @export
+#' 
 feature_selection <- function(df, initial_test_size = 0.3, train_size = 0.7, nvmax = 5) {
   # put in the validation
   required_cols <- c("date", "search_trends_anxiety", "new_persons_vaccinated",

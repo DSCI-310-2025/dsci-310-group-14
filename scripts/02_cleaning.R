@@ -14,6 +14,7 @@ Options:
 
 library(tidyverse)
 library(docopt)
+source("R/clean_covid_data.R")
 
 
 opt <- docopt(doc)
@@ -22,11 +23,9 @@ opt <- docopt(doc)
 data_path <- opt$file_path
 
 us_covid <- read_csv(data_path)
-# select only variables of interest for further analysis
-us_selected <- us_covid |>
-               select(date, search_trends_anxiety, new_persons_vaccinated, 
-                       new_hospitalized_patients, new_confirmed, new_intensive_care_patients) |>
-                drop_na()
+
+# select only variables of interest for further analysis using clean_covid_data()
+us_selected <- clean_covid_data(us_covid)
 
 write_csv(us_selected, opt$output_path)
 
