@@ -1,6 +1,6 @@
 library(testthat)
 library(here)
-source(here("R", "results.R"))
+source(here("R", "make_final_lm_model.R"))
 
 # create test data 
 
@@ -30,25 +30,23 @@ test_result <- lm(search_trends_anxiety ~ new_persons_vaccinated + new_hospitali
      data = test_df)
 
 # test incorrect dataframe used as argument
-test_that("`count_classes` should throw an error when incorrect types
+test_that("`make_final_lm_model` should throw an error when incorrect types
 are passed to the `data_frame` argument", {
   expect_error(make_final_lm_model(empty_df))
 })
 
 # test incorrect dataframe used as argument
-test_that("`count_classes` should throw an error when incorrect types
+test_that("`make_final_lm_model` should throw an error when incorrect types
 are passed to the `data_frame` argument", {
   expect_error(make_final_lm_model(missing_col_df))
 })
 
 # test correct type produced
-test_that("`count_classes` should throw an error when incorrect types
-are passed to the `data_frame` argument", {
+test_that("`make_final_lm_model` should create a lm object", {
   expect_s3_class(make_final_lm_model(test_df), "lm")
 })
 
 # test correct coef produed
-test_that("`count_classes` should throw an error when incorrect types
-are passed to the `data_frame` argument", {
+test_that("`make_final_lm_model` should return coef equal to running a lm with the formula shown in test_result", {
   expect_equal(coef(make_final_lm_model(test_df)), coef(test_result))
 })
