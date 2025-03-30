@@ -22,22 +22,33 @@ library(purrr)
 library(leaps)
 library(mltools)
 
+source("R/feature_selection.R")
+
 opt <- docopt(doc)
 
-# split data into training and testing sets:
-processed_data_path   <- opt$input_path
-us_selected <- read_csv(processed_data_path)
+result <- feature_selection(
+  df = us_selected,
+  initial_test_size = 0.3,
+  train_size = 0.7,
+  nvmax = 5,
+  seed = 310
+)
 
-bwd_select_train <- sample_n(us_selected, size = nrow(us_selected) * 0.3,
-                        replace = FALSE)
-model_data <- anti_join(us_selected, 
-                        bwd_select_train,
-                        by = "date")
-covid_train <- sample_n(model_data, size = nrow(model_data) * 0.7,
-                        replace = FALSE)
-covid_test <- anti_join(model_data, 
-                        covid_train,
-                        by = "date")
+# original code before refactor
+# # split data into training and testing sets:
+# processed_data_path   <- opt$input_path
+# us_selected <- read_csv(processed_data_path)
+
+# bwd_select_train <- sample_n(us_selected, size = nrow(us_selected) * 0.3,
+#                         replace = FALSE)
+# model_data <- anti_join(us_selected, 
+#                         bwd_select_train,
+#                         by = "date")
+# covid_train <- sample_n(model_data, size = nrow(model_data) * 0.7,
+#                         replace = FALSE)
+# covid_test <- anti_join(model_data, 
+#                         covid_train,
+#                         by = "date")
 
 
 # converts dates into number of days for feature selection:
