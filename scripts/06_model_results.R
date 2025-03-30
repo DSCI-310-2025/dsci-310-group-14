@@ -39,9 +39,10 @@ covid_test_numeric <- read_csv(test_path)
 final_model <- make_final_lm_model(covid_train_numeric)
 
 #create a table with the regression results
-results_lm_coef(final_model)
+lm_coef <- results_lm_coef(final_model, opt$coefficients)
+
 
 # apply the model to predict test data:
 # find the RMSE between the model's prediction and the actual values
 # create dataframe with RMSPE and R-squared
-model_predictions(final_model, covid_test_numeric)
+performance_metrics <- model_predictions(final_model, covid_test_numeric, opt$metrics_results)
