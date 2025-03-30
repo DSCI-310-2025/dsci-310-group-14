@@ -19,11 +19,10 @@ data/processed/US_partitioned.csv: scripts/02_cleaning.R data/raw/US_cleaned_nam
 			--output_path=data/processed/US_partitioned.csv
 
 # results: plots and tables
-results/tables/summary.csv results/tables/detailed_summary.csv: scripts/03_eda_tbl.R data/raw/US_cleaned_name.csv data/processed/US_partitioned.csv
+results/tables/detailed_summary.csv: scripts/03_eda_tbl.R data/raw/US_cleaned_name.csv data/processed/US_partitioned.csv
 		Rscript scripts/03_eda_tbl.R	\
 			--input_unprocessed=data/raw/US_cleaned_name.csv	\
 			--input_processed=data/processed/US_partitioned.csv	\
-			--tbl_summary=results/tables/summary.csv	\
 			--tbl_detailed_summary=results/tables/detailed_summary.csv
 
 results/figures/pairplot.png results/figures/anxiety_search_time_series.png: scripts/04_eda_viz.R data/raw/US_cleaned_name.csv data/processed/US_partitioned.csv
@@ -52,7 +51,7 @@ results/models/lm_coef.csv results/models/lm_metrics_results.csv: scripts/06_mod
 all_tables_figures: \
 	data/raw/US_cleaned_name.csv \
 	data/processed/US_partitioned.csv \
-	results/tables/summary.csv results/tables/detailed_summary.csv \
+	results/tables/detailed_summary.csv \
 	results/figures/pairplot.png results/figures/anxiety_search_time_series.png \
 	data/processed/train.csv data/processed/test.csv \
 	results/models/bwd_sel_summary.csv results/models/bwd_performance.csv \

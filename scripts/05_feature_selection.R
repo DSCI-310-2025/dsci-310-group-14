@@ -11,7 +11,6 @@ Options:
 --bwd_sel_summary=<bwd_sel_summary> A path/filename to save summary result table
 --bwd_performance=<bwd_performance> A path/filename to save performance result table
 " -> doc
-
 set.seed(310)
 
 library(tidyverse)
@@ -43,7 +42,7 @@ covid_test <- anti_join(model_data,
 # converts dates into number of days for feature selection:
 covid_train_numeric <- covid_train |> 
                        mutate(date = as.numeric(date))
-write_csv(covid_train_numeric, opt$output_train)
+write_csv(covid_train_numeric, opt$outout_train)
 
 covid_test_numeric <- covid_test|> 
                       mutate(date = as.numeric(date))
