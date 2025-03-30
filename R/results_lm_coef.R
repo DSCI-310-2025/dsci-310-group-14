@@ -4,7 +4,11 @@
 #'
 #' @return returns the lm coefficients and a csv with the data saved onto it
 #' @export
-make_lm_coef <- function(lm_model) {
+results_lm_coef <- function(lm_model) {
+    
+    if (!all(class(lm_model) == 'lm')) {
+    stop("Please provide a lm model")
+    }
 
     lm_coef <- tidy(lm_model)
     write_csv(lm_coef, "results/lm_coef.csv")

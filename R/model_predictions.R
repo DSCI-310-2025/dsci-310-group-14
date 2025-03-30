@@ -5,13 +5,21 @@
 #'
 #' @return returns a table with the R^2 and RMSE values
 #' @export
-rmse_r2_table <- function(final_model, test_df) {
-
-    # Input validation      
+model_predictions <- function(final_model, test_df) {
+    # Input validation 
+    required_cols <- c("date", "search_trends_anxiety", "new_persons_vaccinated",
+                     "new_hospitalized_patients", "new_confirmed", "new_intensive_care_patients")
+    
+    if (!all(required_cols %in% names(test_df))) {
+        missing <- setdiff(required_cols, names(test_df))
+        stop("Missing required columns: ", paste(missing, collapse = ", "))
+        }
+  
+       
     if (!all(is.numeric(test_df$date))) {
         stop("Date is not numeric")
         }
-
+        
     # apply the model to predict test data:
     final_model_predictions <- predict(final_model, newdata = test_df)
     
@@ -22,6 +30,6 @@ rmse_r2_table <- function(final_model, test_df) {
     # create dataframe with RMSPE and R-squared, store it as csv and return it
     metrics_results <- tibble(RMSPE = final_model_RMSPE, R_square = summary(final_model)$r.squared)
     write_csv(metrics_results, "results/metrics_results.csv")
-    
-    return(metrics_results)
+
+    metrics_results
 }

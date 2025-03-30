@@ -20,8 +20,7 @@ make_final_lm_model <- function(df) {
         stop("Missing required columns: ", paste(missing, collapse = ", "))
         }
         
-    final_model <- lm(search_trends_anxiety ~ new_persons_vaccinated + new_hospitalized_patients + date,
-                  data = df)
+    lm(search_trends_anxiety ~ new_persons_vaccinated + new_hospitalized_patients + date, 
+    data = df)
                   
-    return(final_model)
 }
