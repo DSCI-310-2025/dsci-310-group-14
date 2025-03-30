@@ -11,6 +11,7 @@ Options:
 --bwd_sel_summary=<bwd_sel_summary> A path/filename to save summary result table
 --bwd_performance=<bwd_performance> A path/filename to save performance result table
 " -> doc
+
 set.seed(310)
 
 library(tidyverse)
@@ -28,7 +29,7 @@ processed_data_path   <- opt$input_path
 us_selected <- read_csv(processed_data_path)
 
 bwd_select_train <- sample_n(us_selected, size = nrow(us_selected) * 0.3,
-                        replace = FALSE)
+                             replace = FALSE)
 model_data <- anti_join(us_selected, 
                         bwd_select_train,
                         by = "date")
@@ -41,21 +42,21 @@ covid_test <- anti_join(model_data,
 
 # converts dates into number of days for feature selection:
 covid_train_numeric <- covid_train |> 
-                       mutate(date = as.numeric(date))
-write_csv(covid_train_numeric, opt$outout_train)
+  mutate(date = as.numeric(date))
+write_csv(covid_train_numeric, opt$output_train)
 
 covid_test_numeric <- covid_test|> 
-                      mutate(date = as.numeric(date))
+  mutate(date = as.numeric(date))
 write_csv(covid_test_numeric, opt$output_test)
 
 # backward selection:
 covid_backward_sel <- regsubsets(x = search_trends_anxiety ~ new_persons_vaccinated + 
-                                                             new_hospitalized_patients +
-                                                             new_confirmed +
-                                                             new_intensive_care_patients + date,
-                                  nvmax = 5,
-                                  data = covid_train_numeric,
-                                  method = "backward",)
+                                   new_hospitalized_patients +
+                                   new_confirmed +
+                                   new_intensive_care_patients + date,
+                                 nvmax = 5,
+                                 data = covid_train_numeric,
+                                 method = "backward",)
 covid_bwd_summary <- summary(covid_backward_sel)
 covid_bwd_summary_df <- as.tibble((covid_bwd_summary[["which"]]))
 
@@ -63,9 +64,9 @@ write_csv(covid_bwd_summary_df, opt$bwd_sel_summary)
 
 # summary of each model' performance
 covid_bwd_performance <- tibble(n_input_variables = 1:5,
-                          RSQ = covid_bwd_summary$rsq,
-                          RSS = covid_bwd_summary$rss,
-                          ADJ.R2 = covid_bwd_summary$adjr2)
+                                RSQ = covid_bwd_summary$rsq,
+                                RSS = covid_bwd_summary$rss,
+                                ADJ.R2 = covid_bwd_summary$adjr2)
 
 covid_bwd_performance
 write_csv(covid_bwd_performance, opt$bwd_performance)

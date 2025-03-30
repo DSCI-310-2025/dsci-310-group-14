@@ -2,10 +2,11 @@
 #'
 #' @param final_model A lm model 
 #' @param test_df The test split of the data we will be verifying against. This should have date as a numeric value
-#'
+#' @param output_file  Path to save the output
+
 #' @return returns a table with the R^2 and RMSE values
 #' @export
-model_predictions <- function(final_model, test_df) {
+model_predictions <- function(final_model, test_df, output_file) {
     # Input validation 
     required_cols <- c("date", "search_trends_anxiety", "new_persons_vaccinated",
                      "new_hospitalized_patients", "new_confirmed", "new_intensive_care_patients")
@@ -29,7 +30,6 @@ model_predictions <- function(final_model, test_df) {
                         
     # create dataframe with RMSPE and R-squared, store it as csv and return it
     metrics_results <- tibble(RMSPE = final_model_RMSPE, R_square = summary(final_model)$r.squared)
-    write_csv(metrics_results, "results/metrics_results.csv")
 
-    metrics_results
+    write_csv(metrics_results, output_file)
 }

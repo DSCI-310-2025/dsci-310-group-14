@@ -46,7 +46,7 @@ results/models/lm_coef.csv results/models/lm_metrics_results.csv: scripts/06_mod
 			--input_test=data/processed/test.csv \
 			--coefficients=results/models/lm_coef.csv \
 			--metrics_results=results/models/lm_metrics_results.csv
-			
+
 # produce all tables and figures
 all_tables_figures: \
 	data/raw/US_cleaned_name.csv \
@@ -55,7 +55,7 @@ all_tables_figures: \
 	results/figures/pairplot.png results/figures/anxiety_search_time_series.png \
 	data/processed/train.csv data/processed/test.csv \
 	results/models/bwd_sel_summary.csv results/models/bwd_performance.csv \
-	results/models/lm_coef.csv results/models/lm_metrics_results.csv
+	results/models/lm_coef.csv
 
 # write the report
 index.html: reports/covid_anxiety_predictors_analysis.qmd
