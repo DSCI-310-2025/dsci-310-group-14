@@ -1,14 +1,16 @@
-#' perform feature selection using backward selection
-#'
-#' @param df Data frame containing the data
-#' @param initial_test_size Proportion of data for initial test split (default: 0.3)
-#' @param train_size Proportion of remaining data for training (default: 0.7)
-#' @param nvmax Maximum number of variables to include in model (default: 5)
-#' @return List containing:
-#'   - train_data: Training data with numeric dates
-#'   - test_data: Testing data with numeric dates
-#'   - selection_summary: Summary of selected variables
-#'   - performance: Model performance metrics
+#' perform backward feature selection on COVID data
+#' @param df Data frame containing the expected columns
+#' @param initial_test_size size for initial holdout set 
+#' @param train_size proportion for training after holdout 
+#' @param nvmax maximum number of variables to include 
+#' @return a list with:
+#'   - train_data: the training set with numeric dates
+#'   - test_data: test set with numeric dates
+#'   - selected_features: character vector of selected features
+#'   - performance: data frame with model metrics
+#' @export
+#' 
+
 feature_selection <- function(df, initial_test_size = 0.3, train_size = 0.7, nvmax = 5) {
 
   

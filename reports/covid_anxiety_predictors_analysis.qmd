@@ -54,14 +54,6 @@ us_covid <- read_csv("../data/raw/US.csv")
 ## Exploratory Data Analysis (EDA)
 During EDA, we will first select only the 6 variables of interest for further exploratory data analysis and regression analysis. This preliminary variable selection is then followed by computation of their summary statistic and visualizations to explore the trends and patterns among the relevant variables:
 
-```{r}
-#| label: tbl-selected-data
-#| tbl-cap: "Summary preview of US COVID-19 search trend dataset with the 5 selected variables of interest in the Variable column"
-us_selected <- read_csv("../results/tables/summary.csv")
-knitr::kable(head(us_selected))
-```
-
-
 The following @tbl-summary displays summary statistics of all 6 variables of interest relavant to our research question. Notably, we see that `new_persons_vaccinated` and `new_intensive_care_patients` contain many missing values which would be removed from the data before they enter into further analysis.
 
 Moreover, we see that on average, there are around 80,0000 people getting newly vaccinated across the entirety of the COVID-19 pandemic in the US.
