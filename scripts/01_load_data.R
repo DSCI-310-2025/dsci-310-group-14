@@ -14,11 +14,12 @@ library(tidyverse)
 library(janitor)
 library(docopt)
 
+source("R/load_data.R")
+
 opt <- docopt(doc)
 
 # load data
-
-data <- read_csv(opt$file_path)
+data <- load_data(opt$file_path)
 
 # clean column names in loaded data
 us_covid <- janitor::clean_names(data)

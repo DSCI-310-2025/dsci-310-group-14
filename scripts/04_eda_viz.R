@@ -6,6 +6,7 @@ the data set. The visualizations and tables will be saved as files.
 
 Usage: 04_eda_viz.R --input_unprocessed=<input_unprocessed> --input_processed=<input_processed> --output_fig1=<output_fig1> --output_fig2=<output_fig2>
 " -> doc
+
 library(tidyverse)
 library(docopt)
 library(GGally)
@@ -14,17 +15,18 @@ library(GGally)
 source("R/eda_viz_pairplot.R")
 source("R/eda_viz.R")
 
+
+# Parse command line options
 opt <- docopt(doc)
 
-# read unprocessed and processed data
+# Read unprocessed and processed data
 unprocessed_data_path <- opt$input_unprocessed
 processed_data_path   <- opt$input_processed
 
 us_covid    <- read_csv(unprocessed_data_path)
 us_selected <- read_csv(processed_data_path)
 
-
-# Figure 1: Pair plot of all variables
+# 📊 Figure 1: Pair plot of all variables (from processed data)
 create_pairs_plot(us_selected, opt$output_fig1, width = 16, height = 12)
 
 ggsave(opt$output_fig1, width = 15)
@@ -46,3 +48,4 @@ options(repr.plot.width = 14, repr.plot.height = 9)
 anxiety_time_plot <- plot_anxiety_time_series(us_covid, opt$output_fig2)
 
 ggsave(opt$output_fig2, width = 10)
+

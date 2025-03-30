@@ -1,12 +1,18 @@
 # author: Vincy Huang
 # date: 2025-03-11
 
-"This script creates exploratory data table(s) to help readers understand the data set. The visualizations and tables will be saved as files. 
+"This script creates exploratory data table(s) to help readers understand the data set. 
+The visualizations and tables will be saved as files. 
 
 Usage: 03_eda_tbl.R --input_unprocessed=<input_unprocessed> --input_processed=<input_processed> --tbl_detailed_summary=<tbl_detailed_summary> 
+
 " -> doc
+
 library(tidyverse)
 library(docopt)
+source("R/eda_tbl.R")
+
+# 🔧 Source the summary function
 source("R/eda_tbl.R")
 
 opt <- docopt(doc)
