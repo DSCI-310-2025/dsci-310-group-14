@@ -29,7 +29,7 @@ model_predictions <- function(final_model, test_df) {
                         
     # create dataframe with RMSPE and R-squared, store it as csv and return it
     metrics_results <- tibble(RMSPE = final_model_RMSPE, R_square = summary(final_model)$r.squared)
-    write_csv(metrics_results, "results/metrics_results.csv")
+    write_csv(metrics_results, "results/models/metrics_results.csv")
 
     metrics_results
 }
