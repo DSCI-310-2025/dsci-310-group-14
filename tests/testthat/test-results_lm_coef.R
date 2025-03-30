@@ -1,12 +1,17 @@
 library(testthat)
 library(here)
+library(tidyverse) 
+library(tidymodels)
 source(here::here("R", "make_final_lm_model.R"))
 source(here::here("R", "results_lm_coef.R"))
 
 
+# utilize tempfile for test output file
+output_file <- tempfile(fileext = ".csv")
+
 # create non lm object to give as argument
 missing_col_df <- tibble(class_labels = rep(c("date",
-                                                 "search_trends_anxiety"), 2),
+                                              "search_trends_anxiety"), 2),
                             values = round(runif(4), 1))
 
 # create test dataframes
@@ -27,17 +32,27 @@ test_lm <- make_final_lm_model(test_df)
 # test that 
 test_that("`results_lm_coef` should throw an error when incorrect types
 are passed to the `lm_model` argument", {
-  expect_error(results_lm_coef(missing_col_df))
+  expect_error(results_lm_coef(missing_col_df, output_file))
 })
 
 # test that the correct table is returned
-test_that("`results_lm_coef` should throw an error when incorrect types
-are passed to the `lm_model` argument", {
-
-  expect_equal(results_lm_coef(test_lm), tidy(make_final_lm_model(test_df)))
+test_that("`results_lm_coef` should throw an error when incorrect types 
+          are passed to the `lm_model` argument", {
+  expect_equal(results_lm_coef(test_lm, output_file), 
+               tidy(make_final_lm_model(test_df)))
 })
+
+#read_csv(output_file)
+#print(output_file)
 
 # test that the csv is written
-test_that("`results_lm_coef` should write a file named lm_coef.csv" {
-  expect_true(file.exists("results/lm_coef.csv"))
+test_that("`results_lm_coef` should write a file named lm_coef.csv", {
+  if (file.exists(output_file)) {
+    file.remove(output_file)
+  }
+  results_lm_coef(test_lm, output_file)
+  print(output_file)
+  expect_true(file.exists(output_file))
+  file.remove(output_file)
 })
+
