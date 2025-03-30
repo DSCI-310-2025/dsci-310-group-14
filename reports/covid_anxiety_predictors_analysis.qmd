@@ -117,20 +117,8 @@ us_missing_counts <- tibble(Variable = table_summary$Variable,
 table_summary_final <- inner_join(table_summary, us_missing_counts, by = "Variable")
 knitr::kable(table_summary_final)
 ```
+![Pairs plot for all variables of interest for exploration.](../results/figures/pairplot.png){#fig-pairplot width=100%}
 
-From the following @fig-pairplot pairplot visualization, we see that new vaccination status and time progression (`date`) has positive moderate association with anxiety search trend. Meanwhile, new hospitalization patient rate is negatively and moderately correlated with anxiety search trend. 
-
-The remaining variables such as the number of newly confirmed COVID-19 cases (`new_confirmed`) and newly admitted intensive care patints (`new_intensive_care_patients`) either show weak negative correlation or no correlation with anxiety search trend.
-```{r}
-#| label: fig-pairplot
-#| fig-cap: "Pairs plot for all variables of interest for exploration. "
-options(repr.plot.width = 16, repr.plot.height = 12) # change plot sizes to an appropiate size
-
-ggpairs(us_selected, aes(alpha = 0.5)) +
-    theme(text = element_text(size = 13)) +
-    ggtitle("Pairs plot for all variables of interest for exploration") +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-```
 > `new_persons_vaccinated` seems to have a moderate positive linear correlation with anxiety serach trend.
 > 
 > `new_hospitalized_patients` seems to have a weak negative linear correlation with anxiety serach trend.
@@ -139,16 +127,14 @@ ggpairs(us_selected, aes(alpha = 0.5)) +
 >
 > `date` seems to have a weak positive linear correlation with anxiety serach trend.
 
-In @fig-trend, we can observe that anxiety searches seem to be consistent across the COVID-19 pandemic except for 3 peaks around winter of 2020, spring of 2021, and spring of 2022.
-```{r}
-#| label: fig-trend
-#| fig-cap: "Time Series Plot of the Normalized Google Search Volume for Anxiety on a given date."
-options(repr.plot.width = 14, repr.plot.height = 9)
-ggplot(us_covid, aes(y = search_trends_anxiety, x = date)) +
-  geom_line(color = "cornflower blue") +
-  labs(title = "Google Searches Regarding Anxiety over Time", x = "Date", y = "Normalized Search Volume")
+From the @fig-pairplot pairplot visualization above, we see that new vaccination status and time progression (`date`) has positive moderate association with anxiety search trend. Meanwhile, new hospitalization patient rate is negatively and moderately correlated with anxiety search trend. 
 
-```
+The remaining variables such as the number of newly confirmed COVID-19 cases (`new_confirmed`) and newly admitted intensive care patints (`new_intensive_care_patients`) either show weak negative correlation or no correlation with anxiety search trend.
+
+![Time Series Plot of the Normalized Google Search Volume for Anxiety on a given date.](../results/figures/anxiety_search_time_series.png){#fig-trend width=100%}
+
+In @fig-trend, we can observe that anxiety searches seem to be consistent across the COVID-19 pandemic except for 3 peaks around winter of 2020, spring of 2021, and spring of 2022.
+
 
 ## Feature Selection: Backward Selection
 In this section, we perform feature selection using backward seleciton method. Using backward selection, we will be able to select the number of variables has optimal predictive ability using measures of adjusted $R^2$. Higher adjusted $R^2$ indicates better predictive performance of the features.
