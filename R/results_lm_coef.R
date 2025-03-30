@@ -11,7 +11,6 @@ results_lm_coef <- function(lm_model) {
     }
 
     lm_coef <- tidy(lm_model)
-    write_csv(lm_coef, "results/lm_coef.csv")
     
-    return(lm_coef)
+    lm_coef
 }
