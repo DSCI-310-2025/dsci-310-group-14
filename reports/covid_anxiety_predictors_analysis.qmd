@@ -1,7 +1,7 @@
 ---
 title: "Group 14: Predict COVID-19 Anxiety Search Trend - Regression"
 author: "Alina Hameed, Vincy Huang, Alan Lee, Charlotte Ren "
-date: 2025-03-15
+date: 2025-03-29
 format:
    html:
      embed-resources: true
@@ -43,12 +43,6 @@ By studying these variables, we are attempting to observe patterns and correlati
 #| code-fold: true
 # load libraries
 library(tidyverse)
-library(GGally)
-library(purrr)
-library(knitr)
-library(tidymodels)
-library(leaps)
-library(mltools)
 set.seed(310)
 ```
 
@@ -62,59 +56,20 @@ During EDA, we will first select only the 6 variables of interest for further ex
 
 ```{r}
 #| label: tbl-selected-data
-#| tbl-cap: "Preview of US COVID-19 search trend dataset with selected variables of interest."
-us_selected <- us_covid |> 
-              select(date, search_trends_anxiety, new_persons_vaccinated, new_hospitalized_patients, new_confirmed, new_intensive_care_patients) |> 
-              drop_na()
+#| tbl-cap: "Summary preview of US COVID-19 search trend dataset with the 5 selected variables of interest in the Variable column"
+us_selected <- read_csv("../results/tables/summary.csv")
 knitr::kable(head(us_selected))
 ```
 
-```{r}
-# summarise all numeric values with 5 number summary + mean
-covid_summary <- us_selected %>%
-  summarise(across(where(is.numeric), list(
-    Min = min,
-    Q25 = ~quantile(.x, 0.25),
-    Mean = mean,
-    Median = median,
-    Q75 = ~quantile(.x, 0.75),
-    Max = max
-  ), .names = "{.col}_{.fn}")) %>%
-  pivot_longer(cols = everything(), names_to = c("Variable", "Statistic"), names_sep = "_(?=[^_]+$)") %>%
-  pivot_wider(names_from = Statistic, values_from = value)
-```
+
 The following @tbl-summary displays summary statistics of all 6 variables of interest relavant to our research question. Notably, we see that `new_persons_vaccinated` and `new_intensive_care_patients` contain many missing values which would be removed from the data before they enter into further analysis.
 
 Moreover, we see that on average, there are around 80,0000 people getting newly vaccinated across the entirety of the COVID-19 pandemic in the US.
 ```{r}
 #| label: tbl-summary
-#| tbl-cap: "Summary statistics of selected variables with missing values counts of the original dataset."
+#| tbl-cap: "Summary statistics of selected variables with total observation counts and missing values counts from the original dataset."
 
-
-dates_day <- as.numeric(us_selected$date)
-
-date_summary <- tibble(Variable = c("date"),
-                      Min = min(dates_day),
-                      Q25 = quantile(dates_day, 0.25),
-                      Mean = mean(dates_day),
-                      Median = median(dates_day),
-                      Q75 = quantile(dates_day, 0.75),
-                      Max = max(dates_day))|>
-                mutate(across(where(is.numeric), as_date))
-
-table_summary <- rbind(covid_summary,date_summary)
-
-#Count missing values from original dataset
-us_missing <- us_covid |>
-  select(search_trends_anxiety, new_persons_vaccinated, new_hospitalized_patients,
-         new_confirmed, new_intensive_care_patients,date)
-
-us_missing_counts <- tibble(Variable = table_summary$Variable,
-                            Observations = colSums(!is.na(us_missing)),
-                            Missing = colSums(is.na(us_missing)))
-
-#combine together all summary data
-table_summary_final <- inner_join(table_summary, us_missing_counts, by = "Variable")
+table_summary_final <- read_csv("../results/tables/detailed_summary.csv")
 knitr::kable(table_summary_final)
 ```
 
@@ -140,52 +95,24 @@ In @fig-trend, we can observe that anxiety searches seem to be consistent across
 ## Feature Selection: Backward Selection
 In this section, we perform feature selection using backward seleciton method. Using backward selection, we will be able to select the number of variables has optimal predictive ability using measures of adjusted $R^2$. Higher adjusted $R^2$ indicates better predictive performance of the features.
 
-```{r}
-set.seed(310)
 
-# split data into training and testing sets:
-bwd_select_train <- sample_n(us_selected, size = nrow(us_selected) * 0.3,
-                        replace = FALSE)
-model_data <- anti_join(us_selected, 
-                        bwd_select_train,
-                        by = "date")
-covid_train <- sample_n(model_data, size = nrow(model_data) * 0.7,
-                        replace = FALSE)
-covid_test <- anti_join(model_data, 
-                        covid_train,
-                        by = "date")
-```
 Using backward selection over the 5 feature variables, @Tbl-bwd-selection gives the selection results, showing which feature is being selected into the model each time (the selected variable is denoted as `TRUE`). @Tbl-bwd-performance shows the adjusted $R^2$ (`ADJ.R2`) performance of model corresponding to the number of `TRUE` feature input(s) displayed in @tbl-bwd-selection.
 ```{r}
 #| label: tbl-bwd-selection
 #| tbl-cap: "The features being selected during each step of backward model selection."
 # converts dates into number of days:
-covid_train_numeric <- covid_train |> 
-                       mutate(date = as.numeric(date))
 
-
-# backward selection:
-covid_backward_sel <- regsubsets(x = search_trends_anxiety ~ new_persons_vaccinated + 
-                                                             new_hospitalized_patients +
-                                                             new_confirmed +
-                                                             new_intensive_care_patients +
-                                                             date,
-                                  nvmax = 5,
-                                  data = covid_train_numeric,
-                                  method = "backward",)
-
-covid_bwd_summary <- summary(covid_backward_sel)
-
-knitr::kable(covid_bwd_summary$which)
+covid_bwd_summary <- read_csv("../results/models/bwd_sel_summary.csv")
+knitr::kable(covid_bwd_summary)
 
 ```
 
 ```{r}
 #| label: tbl-bwd-performance
 #| tbl-cap: "RSQ, RSS, and Adjusted R^2 of each model with the number of features used."
-covid_bwd_performance <- tibble(n_input_variables = 1:5, 
-                                RSQ = covid_bwd_summary$rsq, 
-                                ADJ.R2 = covid_bwd_summary$adjr2)
+
+covid_bwd_performance <- read_csv("../results/models/bwd_performance.csv")
+
 knitr::kable(covid_bwd_performance)
 
 highest_ADJ.R2 <- round(pull(slice_max(covid_bwd_performance, ADJ.R2), ADJ.R2), 3)
@@ -202,15 +129,15 @@ chosen_n_input <- covid_bwd_performance |>
 ```{r}
 #| label: tbl-coefficients
 #| tbl-cap: "Coefficients and intercept of the selected linear model."
-final_model <- lm(search_trends_anxiety ~ new_persons_vaccinated + new_hospitalized_patients + date, data = covid_train_numeric)
-final_model_df <- tidy(final_model)
+
+final_model_df <- read_csv("../results/models/lm_coef.csv")
+
 knitr::kable(final_model_df)
-new_vax_coef <- signif(final_model_df$estimate[2], digit = 3)
-new_hos_coef <- signif(final_model_df$estimate[3], digit = 3)
-date_coef    <- signif(final_model_df$estimate[4], digit = 3)
+
+new_vax_coef   <- signif(final_model_df$estimate[2], digit = 3)
+new_hos_coef   <- signif(final_model_df$estimate[3], digit = 3)
+date_coef      <- signif(final_model_df$estimate[4], digit = 3)
 intercept_coef <- round(final_model_df$estimate[1], 3)
-
-
 ```
 
 According to the resultant coefficients from @tbl-coefficients, we create a linear formula of our regression model:
@@ -225,34 +152,19 @@ According to the resultant coefficients from @tbl-coefficients, we create a line
 #| label: tbl-metrics
 #| tbl-cap: "Model performance metrics."
 # make sure dates are in numeric form as days since 1970-01-01
-covid_test_numeric <- covid_test|> 
-                      mutate(date = as.numeric(date))
-# apply the model to predict test data
-final_model_predictions <- predict(final_model, newdata = covid_test_numeric)
-
-# find the RMSE between the model's prediction and the actual values
-final_model_RMSPE = rmse(preds = final_model_predictions,
-                        actuals = covid_test_numeric$search_trends_anxiety)
-
-# R-squared:
-r_sqr <- summary(final_model)$r.squared
-
-# create dataframe with RMSPE and R-squared
-metrics_results<-tibble(RMSPE = final_model_RMSPE, R_square = r_sqr)
-
+metrics_results <- read_csv("../results/models/lm_metrics_results.csv")
 knitr::kable(metrics_results)
-
 ```
 
-The current model has a root mean square prediction error (RMSPE) of `{r} round(final_model_RMSPE, 3)`, suggesting a large discrepancy between the actual response variable and the predicted response variable anxiety search. 
+The current model has a root mean square prediction error (RMSPE) of `{r} round(pull(metrics_results, RMSPE), 3)`, suggesting a large discrepancy between the actual response variable and the predicted response variable anxiety search. 
 
-At the same time, this model has a $R^2$ of `{r} round(r_sqr, 3)`, suggesting that around `{r} round(r_sqr, 2) * 100`% of variance in anxiety Google search trend during the COVID-19 pandemic is explained conjointly by new vaccination, new hospitalization, and progression of time.
+At the same time, this model has a $R^2$ of `{r} round(pull(metrics_results, R_square), 3)`, suggesting that around `{r} round(pull(metrics_results, R_square), 2) * 100`% of variance in anxiety Google search trend during the COVID-19 pandemic is explained conjointly by new vaccination, new hospitalization, and progression of time.
 
 
 # Discussion
 ## Summary of Findings
 
-Our results discovered that COVID-19 pandemic-anxiety-related search patterns were weakly influenced by the vaccination rate, hospital rates, and the time elapsed. The vaccination rate increase was strongly correlated with anxiety-related search increases, but growing hospital rates were correlated with decreased anxiety searches. The model's `{r} round(r_sqr, 2) * 100`% variance explanation suggests the possibility that additional independent variables beyond what was measured within the database may also contribute to a massive amount of this variance.
+Our results discovered that COVID-19 pandemic-anxiety-related search patterns were weakly influenced by the vaccination rate, hospital rates, and the time elapsed. The vaccination rate increase was strongly correlated with anxiety-related search increases, but growing hospital rates were correlated with decreased anxiety searches. The model's `{r} round(pull(metrics_results, R_square), 2) * 100`% variance explanation suggests the possibility that additional independent variables beyond what was measured within the database may also contribute to a massive amount of this variance.
 
 ## Expected vs. Actual Results
 
