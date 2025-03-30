@@ -22,9 +22,9 @@ library(leaps)
 library(mltools)
 
 # source R functions
-source("make_final_lm_model.R")
-source("results_lm_coef.R")
-source("model_predictions.R")
+source(here::here("R", "make_final_lm_model.R"))
+source(here::here("R", "results_lm_coef.R"))
+source(here::here("R", "model_predictions.R"))
 
 opt <- docopt(doc)
 
