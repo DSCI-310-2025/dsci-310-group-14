@@ -67,10 +67,15 @@ test_that("`model_predictions` should return correct metrics table", {
   # Calculate expected metrics
   final_model_predictions <- predict(test_lm, newdata = df_numeric)
   
-  pred_df <- data.frame(truth = df_numeric$search_trends_anxiety,
-                     estimate = final_model_predictions)
-  
-  final_model_RMSPE <- yardstick::rmse(pred_df, truth, estimate)$.estimate
+pred_df <- tibble(truth = df_numeric$search_trends_anxiety,
+                  estimate = final_model_predictions)
+
+final_model_RMSPE <- yardstick::rmse(
+  data = pred_df,
+  truth = truth,
+  estimate = estimate
+)$.estimate
+
   # final_model_RMSPE <- rmse(final_model_predictions, df_numeric$search_trends_anxiety)
   expected_metrics <- tibble(RMSPE = final_model_RMSPE, R_square = summary(test_lm)$r.squared)
   
