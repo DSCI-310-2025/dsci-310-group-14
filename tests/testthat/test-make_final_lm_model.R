@@ -1,5 +1,6 @@
 library(testthat)
 library(here)
+library(tidyverse)
 source(here("R", "make_final_lm_model.R"))
 
 # create test data 

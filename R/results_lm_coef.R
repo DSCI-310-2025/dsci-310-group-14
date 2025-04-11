@@ -15,3 +15,4 @@ results_lm_coef <- function(lm_model, output_file) {
     write_csv(lm_coef, output_file)
 
 }
+

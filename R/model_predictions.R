@@ -25,8 +25,8 @@ model_predictions <- function(final_model, test_df, output_file) {
     final_model_predictions <- predict(final_model, newdata = test_df)
     
     # find the RMSE between the model's prediction and the actual values
-    final_model_RMSPE = rmse(preds = final_model_predictions,
-                        actuals = test_df$search_trends_anxiety)
+    final_model_RMSPE = rmse(actual = test_df$search_trends_anxiety,
+                             predicted = final_model_predictions)
                         
     # create dataframe with RMSPE and R-squared, store it as csv and return it
     metrics_results <- tibble(RMSPE = final_model_RMSPE, R_square = summary(final_model)$r.squared)
