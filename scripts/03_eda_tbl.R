@@ -10,10 +10,6 @@ Usage: 03_eda_tbl.R --input_unprocessed=<input_unprocessed> --input_processed=<i
 
 library(tidyverse)
 library(docopt)
-source("R/eda_tbl.R")
-
-# 🔧 Source the summary function
-source("R/eda_tbl.R")
 
 opt <- docopt(doc)
 
@@ -24,6 +20,6 @@ processed_data_path   <- opt$input_processed
 us_covid    <- read_csv(unprocessed_data_path)
 us_selected <- read_csv(processed_data_path)
 
-table_summary_final <- summarize_covid_data(us_covid, us_selected)
+table_summary_final <- covidanxietytrends::summarize_covid_data(us_covid, us_selected)
 
 write_csv(table_summary_final, opt$tbl_detailed_summary)
