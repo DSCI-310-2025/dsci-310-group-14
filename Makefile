@@ -2,7 +2,7 @@
 .PHONY: install_covidanxietytrends all reports all_tables_figures clean
 
 # render analysis report
-all: all_tables_figures index.html reports/covid_anxiety_predictors_analysis.html
+all: install_covidanxietytrends all_tables_figures index.html reports/covid_anxiety_predictors_analysis.html
 
 # install covidanxietytrends package to run analysis
 install_covidanxietytrends:
@@ -40,7 +40,8 @@ data/processed/train.csv data/processed/test.csv results/models/bwd_sel_summary.
 			--output_train=data/processed/train.csv \
 			--output_test=data/processed/test.csv \
 			--bwd_sel_summary=results/models/bwd_sel_summary.csv \
-			--bwd_performance=results/models/bwd_performance.csv
+			--bwd_performance=results/models/bwd_performance.csv \
+			--selected_features=results/models/selected_features.csv \
 
 results/models/lm_coef.csv results/models/lm_metrics_results.csv: scripts/06_model_results.R data/processed/train.csv data/processed/test.csv
 		Rscript scripts/06_model_results.R \
