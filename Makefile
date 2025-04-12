@@ -1,11 +1,13 @@
 
-.PHONY: all reports all_tables_figures clean
+.PHONY: install_covidanxietytrends all reports all_tables_figures clean
 
 # render analysis report
-all:
-	make all_tables_figures
-	make index.html
-	make reports/covid_anxiety_predictors_analysis.html
+all: all_tables_figures index.html reports/covid_anxiety_predictors_analysis.html
+
+# install covidanxietytrends package to run analysis
+install_covidanxietytrends:
+		Rscript scripts/install_covidanxietytrends.R
+
 
 # load data
 data/raw/US_cleaned_name.csv: scripts/01_load_data.R data/raw/US.csv

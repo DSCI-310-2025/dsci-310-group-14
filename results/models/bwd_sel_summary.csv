@@ -1,6 +1,0 @@
-(Intercept),new_persons_vaccinated,new_hospitalized_patients,new_confirmed,new_intensive_care_patients,date
-TRUE,TRUE,FALSE,FALSE,FALSE,FALSE
-TRUE,TRUE,TRUE,FALSE,FALSE,FALSE
-TRUE,TRUE,TRUE,FALSE,FALSE,TRUE
-TRUE,TRUE,TRUE,FALSE,TRUE,TRUE
-TRUE,TRUE,TRUE,TRUE,TRUE,TRUE

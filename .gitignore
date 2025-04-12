@@ -3,6 +3,8 @@
 .Rapp.history
 .DS_Store
 Rplots.pdf
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
 
 # Session Data files
 .RData
