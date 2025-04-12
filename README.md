@@ -48,13 +48,19 @@ To reproduce our analysis in a containerized environment, please follow the foll
     > <img src="https://github.com/user-attachments/assets/40ae252b-ab2f-4e79-987e-a83a7265aa78" width="430"/>
 
 1. **Run the Container**: Type the following command, then press 'enter' to run the container:
-   On Apple Mac (ARM-based/Intel-based) :
+
+   On Intel-based Macs:
    ```
    docker run --rm -it -p 8888:8787 -e PASSWORD="covid" -v "$(pwd)":/home/rstudio yvinc/dsci-310-group-14
    ```
     > Example output of the above `docker run` command in Terminal (highlighted in grey):
     >
     > <img src="https://github.com/user-attachments/assets/a2ad5fe6-bdbb-4970-afba-30b51588838f" width="420"/>
+
+   On ARM-based Macs (M1, M2, M3 chips):
+   ```
+    docker run --rm -it --platform linux/amd64 -p 8888:8787 -e PASSWORD="covid" -v "$(pwd)":/home/rstudio yvinc/dsci-310-group-14
+   ```
 
    On Windows:
    ```
