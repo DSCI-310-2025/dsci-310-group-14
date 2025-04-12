@@ -13,18 +13,7 @@ Options:
 
 set.seed(310)
 library(docopt)
-# library(covidanxietytrends)
 library(tidyverse)
-# library(tidymodels)
-# library(knitr)
-# library(purrr)
-# library(leaps)
-# library(mltools)
-
-# source R functions
-# source(here::here("R", "make_final_lm_model.R"))
-# source(here::here("R", "results_lm_coef.R"))
-# source(here::here("R", "model_predictions.R"))
 
 opt <- docopt(doc)
 
