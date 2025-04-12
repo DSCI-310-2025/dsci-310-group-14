@@ -10,11 +10,7 @@ Usage: 02_cleaning.R --file_path=<file_path> --output_path=<output_path>
 
 library(readr)
 library(docopt)
-<<<<<<< HEAD
-library(covidanxietytrends)
-=======
 library(assertthat)
->>>>>>> 27b72638287bc38c4365a0ea4d139e466f1ffadf
 
 opt <- docopt(doc)
 
@@ -25,10 +21,6 @@ assert_that(file.exists(opt$file_path))
 data_path <- opt$file_path
 us_covid <- read_csv(data_path)
 
-<<<<<<< HEAD
-# Use the covidanxietytrends package function 
-us_selected <- clean_covid_data(us_covid)
-=======
 # === 3. Check column names ===
 expected_cols <- c("date", "search_trends_anxiety", "new_persons_vaccinated",
                    "new_hospitalized_patients", "new_confirmed", "new_intensive_care_patients")
@@ -59,7 +51,6 @@ stopifnot(median(us_covid$search_trends_anxiety, na.rm = TRUE) < 100)
 
 # === Clean using packaged function ===
 us_selected <- covidanxietytrends::clean_covid_data(us_covid)
->>>>>>> 27b72638287bc38c4365a0ea4d139e466f1ffadf
 
 # === Write cleaned output ===
 write_csv(us_selected, opt$output_path)
