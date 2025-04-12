@@ -10,6 +10,7 @@ Usage: 02_cleaning.R --file_path=<file_path> --output_path=<output_path>
 
 library(readr)
 library(docopt)
+library(covidanxietytrends)
 
 opt <- docopt(doc)
 
@@ -18,7 +19,7 @@ data_path <- opt$file_path
 us_covid <- read_csv(data_path)
 
 # Use the covidanxietytrends package function 
-us_selected <- covidanxietytrends::clean_covid_data(us_covid)
+us_selected <- clean_covid_data(us_covid)
 
 # write processed data
 write_csv(us_selected, opt$output_path)

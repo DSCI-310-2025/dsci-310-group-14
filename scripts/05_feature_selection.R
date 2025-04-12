@@ -14,13 +14,14 @@ Options:
 " -> doc
 
 library(covidanxietytrends)
-
-set.seed(310)
-
 library(readr)
 library(dplyr)
 library(docopt)
 library(leaps)
+
+set.seed(310)
+
+
 
 opt <- docopt(doc)
 

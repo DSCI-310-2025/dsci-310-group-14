@@ -13,11 +13,12 @@ Options:
 library(readr)
 library(janitor)
 library(docopt)
+library(covidanxietytrends)
 
 opt <- docopt(doc)
 
 # load data
-data <- covidanxietytrends::load_data(opt$file_path)
+data <- load_data(opt$file_path)
 
 # clean column names in loaded data
 us_covid <- janitor::clean_names(data)

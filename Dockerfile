@@ -23,4 +23,6 @@ RUN Rscript -e "remotes::install_version('tidymodels', version = '1.3.0', repos 
     remotes::install_version('leaps', version = '3.1', repos = 'https://cran.rstudio.com'); \
     remotes::install_version('mltools', version = '0.1.0', repos = 'https://cran.rstudio.com'); \
     remotes::install_version('here', version = '1.0.1', repos = 'https://cran.rstudio.com'); \
-    remotes::install_version('Metrics', version = '0.1.4', repos = 'https://cran.rstudio.com')"
+    remotes::install_version('Metrics', version = '0.1.4', repos = 'https://cran.rstudio.com'); \
+    remotes::install_github('DSCI-310-2025/covidanxietytrends')"
+    
