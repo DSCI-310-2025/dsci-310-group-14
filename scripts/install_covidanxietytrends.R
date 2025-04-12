@@ -1,3 +1,5 @@
+# Author: Alina Hameed, Vincy Huang, Alan Lee, and Charlotte Ren
+# Date April 12, 2025
 # checks for and installs the convidanxietytrends package. This is used instead 
 # of renv as all other dependancies are included in this package.
 

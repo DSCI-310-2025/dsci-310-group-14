@@ -1,4 +1,4 @@
-# author: Vincy Huang
+# author: Alina Hameed, Vincy Huang, Alan Lee, and Charlotte Ren
 # date: 2025-03-11
 
 "This script creates exploratory data table(s) to help readers understand the data set. 
