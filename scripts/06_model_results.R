@@ -13,7 +13,7 @@ Options:
 
 set.seed(310)
 library(docopt)
-library(tidyverse)
+library(readr)
 
 opt <- docopt(doc)
 

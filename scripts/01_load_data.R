@@ -10,7 +10,7 @@ Options:
 --output_path=<output_path> Path and filename where to designate the file and what to call it.
 " -> doc
 
-library(tidyverse)
+library(readr)
 library(janitor)
 library(docopt)
 
