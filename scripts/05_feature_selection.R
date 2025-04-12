@@ -1,4 +1,4 @@
-# author: Vincy Huang
+# author: Alina Hameed, Vincy Huang, Alan Lee, and Charlotte Ren
 # date: 2025-03-11
 "This script reads data from the second script, performs feature selection 
 for linear regression and summarizes the results as a figure(s) and a table(s).

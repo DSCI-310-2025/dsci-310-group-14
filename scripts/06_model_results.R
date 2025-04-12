@@ -1,4 +1,4 @@
-# author: Vincy Huang
+# author: Alina Hameed, Vincy Huang, Alan Lee, and Charlotte Ren
 # date: 2025-03-12
 "This script reads train/test data from previous script and performs linear regression on
 selected features based on previous feature selection and summarizes the model in table(s).

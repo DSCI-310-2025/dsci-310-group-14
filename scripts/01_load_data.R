@@ -1,4 +1,4 @@
-# author: Vincy Huang
+# author: Alina Hameed, Vincy Huang, Alan Lee, and Charlotte Ren
 # date: 2025-03-11 
 
 "This script downloads the US COVID-19 data from the internet and saves it locally.
@@ -19,7 +19,7 @@ source("R/load_data.R")
 opt <- docopt(doc)
 
 # load data
-data <- load_data(opt$file_path)
+data <- covidanxietytrends::load_data(opt$file_path)
 
 # clean column names in loaded data
 us_covid <- janitor::clean_names(data)
