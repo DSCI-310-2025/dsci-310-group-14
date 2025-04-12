@@ -13,6 +13,8 @@ Options:
 --selected_features=<selected_features> A path/filename to save selected features
 " -> doc
 
+library(covidanxietytrends)
+
 set.seed(310)
 
 library(tidyverse)
@@ -42,7 +44,7 @@ covid_test_numeric <- covid_test |> mutate(date = as.numeric(date))
 write_csv(covid_test_numeric, opt$output_test)
 
 #use the new feature_selection function in r
-result_list <- feature_selection(covid_train_numeric)
+result_list <- covidanxietytrends::feature_selection(covid_train_numeric)
 
 #save outputs
 write_csv(result_list$selection_summary, opt$bwd_sel_summary)
