@@ -14,8 +14,6 @@ library(readr)
 library(janitor)
 library(docopt)
 
-source("R/load_data.R")
-
 opt <- docopt(doc)
 
 # load data
