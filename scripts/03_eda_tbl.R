@@ -8,7 +8,7 @@ Usage: 03_eda_tbl.R --input_unprocessed=<input_unprocessed> --input_processed=<i
 
 " -> doc
 
-library(tidyverse)
+library(readr)
 library(docopt)
 
 opt <- docopt(doc)

@@ -8,7 +8,7 @@ that needs to happen before exploratory data analysis or modeling.
 Usage: 02_cleaning.R --file_path=<file_path> --output_path=<output_path>
 " -> doc
 
-library(tidyverse)
+library(readr)
 library(docopt)
 
 opt <- docopt(doc)

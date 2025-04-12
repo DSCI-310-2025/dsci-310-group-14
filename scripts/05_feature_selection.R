@@ -17,8 +17,8 @@ library(covidanxietytrends)
 
 set.seed(310)
 
-library(tidyverse)
-library(tidymodels)
+library(readr)
+library(dplyr)
 library(docopt)
 library(leaps)
 
