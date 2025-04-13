@@ -84,6 +84,17 @@ To reproduce our analysis in a containerized environment, please follow the foll
 1. After you have signed in, you will see an empty Rstudio navigation page like this:
     > <img src="https://github.com/user-attachments/assets/3c316fab-01dc-4951-ade4-a844dc888382" width="550"/>
 
+1. To make and reproduce the analysis report, move cursor to the Terminal tab right beside the Console tab below the blue R icon in the top left. Click the Terminal tab.
+1. Within the Terminal panel, type the following command to make the analysis report along with all the result outputs and data validation:
+
+    ```
+    make all
+    ```
+    > To clean all output reports and result tables and plots, run:
+    ```
+    make clean
+    ```
+
 1. You can now move your cursor to the right panel of the page near the bottom right. Click into the **`reports`** folder, then left-click the **`covid_anxiety_predictors_analysis.qmd`** Quarto report file to open the analysis.
 1. With `covid_anxiety_predictors_analysis.qmd` opened, navigate your cursor to the **blue `Render` arrow** above the file panel.
 1. Left click this `Render` blue arrow to run our analysis (wait time to produce the analysis is about 15 seconds).
