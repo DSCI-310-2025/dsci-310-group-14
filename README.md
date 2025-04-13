@@ -104,6 +104,11 @@ To reproduce our analysis in a containerized environment, please follow the foll
     - `tidymodels`: Version 1.3.0
     - `leaps`: Version 3.1
     - `mltools`: Version 0.1.0
+    - `here`: Version 1.0.1
+    - `Metrics`: Version 0.1.4
+    - `pointblank`: Version 0.12.2
+    - `janitor`: Version 2.2.0
+    - `covidanxietytrends`: Installed from GitHub repo [`DSCI-310-2025/covidanxietytrends`](https://github.com/DSCI-310-2025/covidanxietytrends)  
 
 
 
