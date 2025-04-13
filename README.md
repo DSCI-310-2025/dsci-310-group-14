@@ -12,6 +12,11 @@ Our workflow includes data preprocessing, exploratory data analysis, and regress
     
 The data used herein is from publicly available repositories, including COVID-19 hospitalization statistics, vaccination records, and Google Trends as collected by Google Open Data which can be found [here!](https://github.com/GoogleCloudPlatform/covid-19-open-data#aggregated-table)
 
+### Our customed `covidanxietytrends` R package:
+To generate the output table and visualization results for our analysis, we created a custom package for this analysis. This package is hosted on Github which can be referenced through the [covidanxietytrends](https://dsci-310-2025.github.io/covidanxietytrends/) page under the Github repo: [covidanxietytrends repo](https://github.com/DSCI-310-2025/covidanxietytrends/)! Installation instruction can be found on the referenced package page.
+
+Direct uses of these functions can be found in our [individual scripts](https://github.com/DSCI-310-2025/dsci-310-group-14/tree/main/scripts) used to produce our analysis results.
+
 ## How to run our data analysis?
 To reproduce our analysis in a containerized environment, please follow the following steps:
 > Note: Our project environment presupposes the basic software setup and hardware requirements in [DSCI 310 Course Computer Setup](https://ubc-dsci.github.io/dsci-310-student/computer-setup.html). We strongly encourage readers to confirm their device setup through this guide.
