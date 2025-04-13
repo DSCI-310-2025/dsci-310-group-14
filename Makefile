@@ -2,7 +2,7 @@
 .PHONY: install_covidanxietytrends all reports all_tables_figures clean
 
 # render analysis report
-all: install_covidanxietytrends all_tables_figures index.html reports/covid_anxiety_predictors_analysis.html
+all: install_covidanxietytrends all_tables_figures index.html reports/covid_anxiety_predictors_analysis.html data_validation
 
 # install covidanxietytrends package to run analysis
 install_covidanxietytrends:
@@ -51,7 +51,7 @@ results/models/lm_coef.csv results/models/lm_metrics_results.csv: scripts/06_mod
 			--metrics_results=results/models/lm_metrics_results.csv
 
 # produce all tables and figures
-all_tables_figures: \
+all_tables_figures:	\
 	data/raw/US_cleaned_name.csv \
 	data/processed/US_partitioned.csv \
 	results/tables/detailed_summary.csv \
@@ -60,6 +60,15 @@ all_tables_figures: \
 	results/models/bwd_sel_summary.csv results/models/bwd_performance.csv \
 	results/models/lm_coef.csv
 
+
+# run data validation
+data_validation/validation_report.html: scripts/07_data_validation.R data/processed/US_partitioned.csv
+	Rscript scripts/07_data_validation.R \
+		--input_path=data/processed/US_partitioned.csv \
+		--output_report=data_validation/validation_report.html
+
+data_validation: data_validation/validation_report.html
+	
 # write the report
 index.html: reports/covid_anxiety_predictors_analysis.qmd
 	quarto render reports/covid_anxiety_predictors_analysis.qmd
@@ -77,6 +86,7 @@ clean:
 	rm -rf results/tables/* results/figures/* results/models/*
 	rm -f data/raw/US_cleaned_name.csv
 	rm -f data/processed/*
+	rm -f data_validation/validation_report.html
 	rm -f index.html
 	rm -f reports/*.pdf
 	rm -f reports/*.html
