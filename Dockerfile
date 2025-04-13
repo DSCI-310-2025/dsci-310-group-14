@@ -15,16 +15,16 @@ EXPOSE 8787
 # Restore environment with renv (if lockfile exists)
 RUN Rscript -e "if (file.exists('renv.lock')) renv::restore(prompt = FALSE) else print('No renv.lock found, skipping restore.')"
 
-# Install specific package versions
-RUN Rscript -e "remotes::install_version('tidymodels', version = '1.3.0', repos = 'https://cran.rstudio.com'); \
-    remotes::install_version('GGally', version = '2.2.1', repos = 'https://cran.rstudio.com'); \
-    remotes::install_version('purrr', version = '1.0.2', repos = 'https://cran.rstudio.com'); \
-    remotes::install_version('knitr', version = '1.45', repos = 'https://cran.rstudio.com'); \
-    remotes::install_version('leaps', version = '3.1', repos = 'https://cran.rstudio.com'); \
-    remotes::install_version('mltools', version = '0.1.0', repos = 'https://cran.rstudio.com'); \
-    remotes::install_version('here', version = '1.0.1', repos = 'https://cran.rstudio.com'); \
-    remotes::install_version('Metrics', version = '0.1.4', repos = 'https://cran.rstudio.com'); \
-    remotes::install_version('assertthat', version = '0.2.1', repos = 'https://cran.rstudio.com'); \
-    remotes::install_github('DSCI-310-2025/covidanxietytrends')"
-
+# Install specific package versions and GitHub package
+RUN Rscript -e "\
+  remotes::install_version('tidymodels', version = '1.3.0', repos = 'https://cran.rstudio.com'); \
+  remotes::install_version('GGally', version = '2.2.1', repos = 'https://cran.rstudio.com'); \
+  remotes::install_version('purrr', version = '1.0.2', repos = 'https://cran.rstudio.com'); \
+  remotes::install_version('knitr', version = '1.45', repos = 'https://cran.rstudio.com'); \
+  remotes::install_version('leaps', version = '3.1', repos = 'https://cran.rstudio.com'); \
+  remotes::install_version('mltools', version = '0.1.0', repos = 'https://cran.rstudio.com'); \
+  remotes::install_version('here', version = '1.0.1', repos = 'https://cran.rstudio.com'); \
+  remotes::install_version('Metrics', version = '0.1.4', repos = 'https://cran.rstudio.com'); \
+  remotes::install_version('pointblank', version = '0.12.2', repos = 'https://cran.rstudio.com'); \
+  remotes::install_github('DSCI-310-2025/covidanxietytrends')"
 
