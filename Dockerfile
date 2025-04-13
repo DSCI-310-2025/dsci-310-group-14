@@ -26,5 +26,6 @@ RUN Rscript -e "\
   remotes::install_version('here', version = '1.0.1', repos = 'https://cran.rstudio.com'); \
   remotes::install_version('Metrics', version = '0.1.4', repos = 'https://cran.rstudio.com'); \
   remotes::install_version('pointblank', version = '0.12.2', repos = 'https://cran.rstudio.com'); \
+  remotes::install_version('janitor', version = '2.2.0', repos = 'https://cran.rstudio.com'); \
   remotes::install_github('DSCI-310-2025/covidanxietytrends')"
 
